@@ -1,0 +1,30 @@
+{
+  "name": "shadow-badger-cli",
+  "version": "0.1.0",
+  "description": "A cli to manage a shadow budget",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "eslint && tsc"
+  },
+  "author": "Rahul Rakshit",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "dependencies": {
+    "commander": "^5.1.0"
+  }
+}
