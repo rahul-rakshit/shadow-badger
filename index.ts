@@ -1,19 +1,54 @@
+import { createConnection, getRepository } from 'typeorm';
+import { CurrencySchema } from './src/entity/Currency';
 import { program } from 'commander';
-import { add } from './src/add';
 
-program
-  .version('0.1.0')
-  .requiredOption(
-    '-1, --first-number <first number>',
-    'The first number for the addition'
-  )
-  .requiredOption(
-    '-2, --second-number <second number>',
-    'The second number for the addition'
-  );
+async function run() {
+  await createConnection({
+    type: 'sqlite',
+    database: './test.sqlite3',
+    entities: [CurrencySchema],
+    logging: ['query', 'schema']
+  });
 
-program.parse(process.argv);
+  program.storeOptionsAsProperties(false).passCommandToAction(false);
 
-const { firstNumber, secondNumber } = program.opts();
+  program
+    .name('shadow-badger')
+    .version('0.1.0')
+    .usage('subcommand arg [options]')
+    .arguments('<model>');
 
-console.log(add(Number(firstNumber), Number(secondNumber)));
+  program
+    .command('add <model>')
+    .description('save a new instance of a model to the database')
+    .requiredOption('-n, --name <name>', 'The currency name, eg. US_Dollar')
+    .requiredOption('-c, --code, <code>', 'The currency code, eg. USD')
+    .requiredOption('-$, --symbol <symbol>', 'The currency symbol, eg. $')
+    .action(
+      async (
+        model: string,
+        opts: { name: string; code: string; symbol: string }
+      ) => {
+        if (model === 'currency') {
+          const repo = getRepository(CurrencySchema);
+          await repo.save(opts);
+        }
+      }
+    );
+
+  program
+    .command('view <model>')
+    .description('read entries of a model from the database')
+    .action(async (model: string) => {
+      if (model === 'currencies' || model === 'currency') {
+        const repo = getRepository(CurrencySchema);
+        const allCurrencies = await repo.find();
+
+        console.table(allCurrencies);
+      }
+    });
+
+  await program.parseAsync(process.argv);
+}
+
+run();
