@@ -15,26 +15,23 @@ async function run() {
   program
     .name('shadow-badger')
     .version('0.1.0')
-    .usage('subcommand arg [options]')
-    .arguments('<model>');
+    .usage('action model [options]');
 
   program
-    .command('add <model>')
-    .description('save a new instance of a model to the database')
-    .requiredOption('-n, --name <name>', 'The currency name, eg. US_Dollar')
+    .command('add')
+    .description('save a new instance of the model to the database')
+    .command('currency')
+    .storeOptionsAsProperties(false)
+    .passCommandToAction(false)
+    .description('save a new currency to the database')
     .requiredOption('-c, --code, <code>', 'The currency code, eg. USD')
+    .requiredOption('-n, --name <name>', 'The currency name, eg. US_Dollar')
     .requiredOption('-$, --symbol <symbol>', 'The currency symbol, eg. $')
-    .action(
-      async (
-        model: string,
-        opts: { name: string; code: string; symbol: string }
-      ) => {
-        if (model === 'currency') {
-          const repo = getRepository(CurrencySchema);
-          await repo.save(opts);
-        }
-      }
-    );
+    .action(async (opts: { name: string; code: string; symbol: string }) => {
+      const { name, code, symbol } = opts;
+      const currencyRepo = getRepository(CurrencySchema);
+      await currencyRepo.save({ name, code, symbol });
+    });
 
   program
     .command('view <model>')
