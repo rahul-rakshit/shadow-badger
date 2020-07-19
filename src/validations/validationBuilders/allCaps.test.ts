@@ -26,4 +26,14 @@ describe('allCaps returns a function that', () => {
     expect(validation).toHaveFailed();
     expect(validation.value).toEqual('Please enter an all caps value.');
   });
+
+  it("also fails validation if value isn't a string", () => {
+    const word = new Date();
+
+    const validate = allCaps();
+    const validation = validate(word);
+
+    expect(validation).toHaveFailed();
+    expect(validation.value).toEqual('Value must be a string.');
+  });
 });

@@ -50,4 +50,15 @@ describe('length returns a function that', () => {
       'Please enter a value of length between 5 and 7 characters.'
     );
   });
+
+  it("also fails validation when value isn't a string", () => {
+    const number = 123456;
+
+    const validate = length(5, 7);
+    // @ts-ignore
+    const validation = validate(number);
+
+    expect(validation).toHaveFailed();
+    expect(validation.value).toEqual('Value must be a string.');
+  });
 });

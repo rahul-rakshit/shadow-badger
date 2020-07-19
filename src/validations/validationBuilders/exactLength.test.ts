@@ -29,4 +29,15 @@ describe('exactLength returns a validation function that', () => {
       'Please enter a value of exact length 10.'
     );
   });
+
+  it("also fails validation if value isn't a string", () => {
+    const number = 1234;
+
+    const validate = exactLength(10);
+    // @ts-ignore
+    const validation = validate(number);
+
+    expect(validation).toHaveFailed();
+    expect(validation.value).toEqual('Value must be a string.');
+  });
 });

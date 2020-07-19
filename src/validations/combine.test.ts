@@ -1,18 +1,20 @@
 import { Either, asSuccess, asFailure } from '../types-d';
-import { ValidationFunction } from './validations-d';
+import { ValidationFunction, Field } from './validations-d';
 import { combine } from './combine';
 
 describe('combine', () => {
   const isLowerCase: ValidationFunction = (
-    val?: string
+    val?: Field
   ): Either<string, true> => {
     if (!val) return asFailure('Must be defined');
+    if (typeof val !== 'string') return asFailure('Must be a string');
     return val === val.toLowerCase()
       ? asSuccess(true)
       : asFailure('Must be lowercase');
   };
-  const isShort: ValidationFunction = (val?: string) => {
+  const isShort: ValidationFunction = (val?: Field) => {
     if (!val) return asFailure('Must be defined');
+    if (typeof val !== 'string') return asFailure('Must be a string');
     return val.length < 5 ? asSuccess(true) : asFailure('Must be short');
   };
 
