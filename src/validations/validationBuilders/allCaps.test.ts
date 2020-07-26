@@ -12,7 +12,7 @@ describe('allCaps returns a function that', () => {
 
   it('passes validation when undefined', () => {
     const validate = allCaps();
-    const validation = validate(undefined as any);
+    const validation = validate();
 
     expect(validation).toHaveSucceeded();
   });

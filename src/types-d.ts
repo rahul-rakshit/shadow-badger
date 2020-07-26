@@ -11,12 +11,12 @@ export interface Success<S> {
 export type Either<F, S> = Failure<F> | Success<S>;
 
 export function failed<F>(val: any): val is Failure<F> {
-  if ((val as Failure<F>).tag === 'left') return true;
+  if ((val as Failure<F>)?.tag === 'left') return true;
   return false;
 }
 
 export function succeeded<S>(val: any): val is Success<S> {
-  if ((val as Success<S>).tag === 'right') return true;
+  if ((val as Success<S>)?.tag === 'right') return true;
   return false;
 }
 

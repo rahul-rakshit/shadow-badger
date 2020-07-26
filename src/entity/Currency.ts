@@ -1,4 +1,9 @@
 import { EntitySchema } from 'typeorm';
+import { ModelValidatorMap } from '../validations/validations-d';
+import { required } from '../validations/validationBuilders/required';
+import { combine } from '../validations/combine';
+import { exactLength } from '../validations/validationBuilders/exactLength';
+import { allCaps } from '../validations/validationBuilders/allCaps';
 
 export interface Currency {
   id?: string;
@@ -26,3 +31,9 @@ export const CurrencySchema = new EntitySchema<Currency>({
     }
   ]
 });
+
+export const currencyValidatorMap: ModelValidatorMap<Currency> = {
+  name: required(),
+  code: combine(required(), exactLength(3), allCaps()),
+  symbol: required()
+};

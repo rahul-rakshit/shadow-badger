@@ -12,7 +12,6 @@ describe('required returns a function that', () => {
 
   it('otherwise fails validation with expected error message', () => {
     const validate = required();
-    // @ts-ignore
     const validation = validate();
 
     expect(validation).toHaveFailed();

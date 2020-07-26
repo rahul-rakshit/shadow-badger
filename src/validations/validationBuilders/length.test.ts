@@ -12,7 +12,6 @@ describe('length returns a function that', () => {
 
   it('passes validation when undefined', () => {
     const validate = length(7, 15);
-    // @ts-ignore
     const validation = validate();
 
     expect(validation).toHaveSucceeded();
@@ -55,7 +54,6 @@ describe('length returns a function that', () => {
     const number = 123456;
 
     const validate = length(5, 7);
-    // @ts-ignore
     const validation = validate(number);
 
     expect(validation).toHaveFailed();

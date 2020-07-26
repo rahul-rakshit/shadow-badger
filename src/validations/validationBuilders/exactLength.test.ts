@@ -12,7 +12,6 @@ describe('exactLength returns a validation function that', () => {
 
   it('passes validation when undefined', () => {
     const validate = exactLength(10);
-    // @ts-ignore
     const validation = validate();
 
     expect(validation).toHaveSucceeded();
@@ -34,7 +33,6 @@ describe('exactLength returns a validation function that', () => {
     const number = 1234;
 
     const validate = exactLength(10);
-    // @ts-ignore
     const validation = validate(number);
 
     expect(validation).toHaveFailed();

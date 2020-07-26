@@ -17,7 +17,7 @@ describe('validateModelObject', () => {
     weight?: string;
   }
 
-  const letterFieldValidatorMap: ModelValidatorMap<Letter> = {
+  const letterValidatorMap: ModelValidatorMap<Letter> = {
     weight: (val?: Field) => {
       const numberVal = Number(val);
       if (isNaN(numberVal)) return asFailure('Value must be a valid number.');
@@ -45,10 +45,7 @@ describe('validateModelObject', () => {
       weight: '750'
     };
 
-    const validation = validateModelObject<Letter>(
-      letter,
-      letterFieldValidatorMap
-    );
+    const validation = validateModelObject<Letter>(letter, letterValidatorMap);
 
     expect(validation).toHaveSucceeded();
     expect(validation.value).toBe(true);
@@ -63,10 +60,7 @@ describe('validateModelObject', () => {
       weight: '750 g'
     };
 
-    const validation = validateModelObject<Letter>(
-      letter,
-      letterFieldValidatorMap
-    );
+    const validation = validateModelObject<Letter>(letter, letterValidatorMap);
 
     expect(validation).toHaveFailed();
     expect(validation.value).toEqual({
@@ -84,10 +78,7 @@ describe('validateModelObject', () => {
       weight: '750'
     };
 
-    const validation = validateModelObject<Letter>(
-      letter,
-      letterFieldValidatorMap
-    );
+    const validation = validateModelObject<Letter>(letter, letterValidatorMap);
 
     expect(validation).toHaveFailed();
     expect(validation.value).toEqual({
