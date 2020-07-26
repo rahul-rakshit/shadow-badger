@@ -4,6 +4,7 @@ import { required } from '../validations/validationBuilders/required';
 import { combine } from '../validations/combine';
 import { exactLength } from '../validations/validationBuilders/exactLength';
 import { allCaps } from '../validations/validationBuilders/allCaps';
+import { generateActionsWrapper } from './actionsWrapper/generateActionsWrapper';
 
 export interface Currency {
   id?: string;
@@ -37,3 +38,5 @@ export const currencyValidatorMap: ModelValidatorMap<Currency> = {
   code: combine(required(), exactLength(3), allCaps()),
   symbol: required()
 };
+
+export const currencyActions = generateActionsWrapper<Currency>(CurrencySchema);

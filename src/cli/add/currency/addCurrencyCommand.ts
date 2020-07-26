@@ -2,11 +2,10 @@ import { program } from 'commander';
 import {
   Currency,
   currencyValidatorMap,
-  CurrencySchema
+  currencyActions
 } from '../../../entity/Currency';
 import { validateModelObject } from '../../../validations/validateModelObject';
 import { failed } from '../../../types-d';
-import { getRepository } from 'typeorm';
 
 export const addCurrencyCommand = program
   .command('currency')
@@ -26,6 +25,5 @@ export const addCurrencyCommand = program
       console.table(validation.value);
       process.exit(1);
     }
-    const currencyRepo = getRepository(CurrencySchema);
-    await currencyRepo.save(newCurrency);
+    await currencyActions.create(newCurrency);
   });
