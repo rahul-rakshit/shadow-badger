@@ -9,31 +9,51 @@ declare global {
   }
 }
 
+const invalidOperationMessage =
+  'Invalid operation. Checking success/failure is only supported for Either-objects.';
+
 expect.extend({
   toHaveSucceeded(received) {
+    const isEither = received?.tag === 'left' || received?.tag === 'right';
     const pass = succeeded(received);
-    if (pass) {
+
+    if (!isEither) {
       return {
-        message: () => `expected ${received} not to have succeeded`,
+        message: () => invalidOperationMessage,
+        pass: this.isNot
+      };
+    } else if (pass) {
+      return {
+        message: () =>
+          'expected Either-object not to have succeeded, but it did.',
         pass: true
       };
     } else {
       return {
-        message: () => `expected ${received} to have succeeded`,
+        message: () =>
+          'expected Either-object to have succeeded, but it failed.',
         pass: false
       };
     }
   },
   toHaveFailed(received) {
-    const pass = failed(received);
-    if (pass) {
+    const isEither = received?.tag === 'left' || received?.tag === 'right';
+    const pass = isEither && failed(received);
+
+    if (!isEither) {
       return {
-        message: () => `expected ${received} not to have failed`,
+        message: () => invalidOperationMessage,
+        pass: this.isNot
+      };
+    } else if (pass) {
+      return {
+        message: () => 'expected Either-object not to have failed, but it did.',
         pass: true
       };
     } else {
       return {
-        message: () => `expected ${received} to have failed`,
+        message: () =>
+          'expected Either-object to have failed, but it succeeded.',
         pass: false
       };
     }
