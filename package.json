@@ -10,6 +10,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "commander": "^5.1.0",
     "sqlite3": "^5.0.0",
     "typeorm": "^0.2.25"

@@ -24,9 +24,7 @@ describe('exactLength returns a validation function that', () => {
     const validation = validate(number);
 
     expect(validation).toHaveFailed();
-    expect(validation.value).toEqual(
-      'Please enter a value of exact length 10.'
-    );
+    expect(validation.value).toEqual('Length must be exactly 10.');
   });
 
   it("also fails validation if value isn't a string", () => {

@@ -6,7 +6,7 @@ export function exactLength(length: number): ValidationFunction {
     if (!val) return asSuccess(true);
     if (typeof val !== 'string') return asFailure('Value must be a string.');
     if (val.length !== length) {
-      return asFailure(`Please enter a value of exact length ${length}.`);
+      return asFailure(`Length must be exactly ${length}.`);
     }
 
     return asSuccess(true);

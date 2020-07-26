@@ -1,15 +1,15 @@
 import { createConnection } from 'typeorm';
 import { CurrencySchema } from './src/entity/Currency';
 import { program } from 'commander';
-import { addCommand } from './src/cli/add/addCommand';
-import { viewCommand } from './src/cli/view/viewCommand';
+import { addCommand } from './src/cli/commands/add/addCommand';
+import { viewCommand } from './src/cli/commands/view/viewCommand';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
     database: './test.sqlite3',
     entities: [CurrencySchema],
-    logging: ['query', 'schema']
+    logging: []
   });
 
   program.storeOptionsAsProperties(false).passCommandToAction(false);
