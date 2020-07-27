@@ -9,8 +9,8 @@ export function logSuccess(
     `Successfully ${verbPastTense} ${modelName}`
   );
   const additionalTextString = additionalText
-    ? colors.green(` ${additionalText}.`)
-    : colors.green('.');
+    ? colors.bold.green(` ${additionalText}.`)
+    : colors.bold.green('.');
 
   console.log(mainString + additionalTextString);
 }

@@ -3,11 +3,13 @@ import { CurrencySchema } from './src/entity/Currency';
 import { program } from 'commander';
 import { addCommand } from './src/cli/commands/add/addCommand';
 import { viewCommand } from './src/cli/commands/view/viewCommand';
+import { editCommand } from './src/cli/commands/edit/editCommand';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
-    database: './test.sqlite3',
+    database:
+      '/Volumes/personal-code/side_projects/shadow-badger-cli/test.sqlite3',
     entities: [CurrencySchema],
     logging: []
   });
@@ -20,6 +22,7 @@ async function run() {
     .usage('action model [options]');
 
   program.addCommand(addCommand);
+  program.addCommand(editCommand);
   program.addCommand(viewCommand);
 
   await program.parseAsync(process.argv);
