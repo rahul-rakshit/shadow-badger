@@ -8,13 +8,10 @@ export function logAndExitOnValidationFailure<M>(
   modelValidation: ModelValidationMessageMap<M>
 ) {
   const mainString = colors.bold.red(
-    `Failed to ${verbPresentTense} ${modelName} `
-  );
-  const reasonString = colors.red(
-    'because it failed validation on the following fields:'
+    `Failed to ${verbPresentTense} ${modelName} because it failed validation on the following fields:`
   );
 
-  console.error(mainString + reasonString);
+  console.error(mainString);
 
   Object.entries(modelValidation).forEach(([key, message]) => {
     console.error(colors.bold(`${key}: `) + message);

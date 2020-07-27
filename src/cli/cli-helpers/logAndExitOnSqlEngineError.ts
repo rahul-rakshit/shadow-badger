@@ -7,11 +7,10 @@ export function logAndExitOnSqlEngineError(
   sqlError: string
 ) {
   const mainString = colors.bold.red(
-    `Failed to ${verbPresentTense} ${modelName}`
+    `Failed to ${verbPresentTense} ${modelName} due to SQL engine error:`
   );
-  const reasonString = colors.red(' due to SQL engine error:');
 
-  console.error(mainString + reasonString);
+  console.error(mainString);
   console.error(colors.italic(sqlError));
 
   process.exit(errorCodes.sqlEngineError);
