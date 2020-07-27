@@ -7,11 +7,17 @@ import {
 
 export interface Actions<T> {
   create: (modelObject: T) => Promise<T>;
-  findAll: (options?: { where: Partial<T> & { id?: number } }) => Promise<T[]>;
-  delete: (id: number) => Promise<DeleteResult>;
-  edit: (id: number, modelObject: T) => Promise<UpdateResult>;
-  findById: (id: number) => Promise<T | undefined>;
-  findByIdOrFail: (id: number) => Promise<T>;
+  findAll: (options?: { where: Partial<T> }) => Promise<T[]>;
+  delete: (id: number | string) => Promise<DeleteResult>;
+  edit: (id: number | string, modelObject: T) => Promise<UpdateResult>;
+  findOne: (
+    id?: number | string,
+    options?: { where: Partial<T> & { id?: number | string } }
+  ) => Promise<T | undefined>;
+  findOneOrFail: (
+    id?: number | string,
+    options?: { where: Partial<T> & { id?: number | string } }
+  ) => Promise<T>;
 }
 
 export function generateActionsWrapper<T>(
@@ -21,20 +27,20 @@ export function generateActionsWrapper<T>(
     async create(modelObject: T) {
       return getRepository(entitySchema).save(modelObject);
     },
-    async findAll(options?: { where: Partial<T> & { id?: number } }) {
+    async findAll(options?: { where: Partial<T> }) {
       return getRepository(entitySchema).find(options);
     },
-    async delete(id: number) {
+    async delete(id: number | string) {
       return getRepository(entitySchema).delete(id);
     },
-    async edit(id: number, modelObject: T) {
+    async edit(id: number | string, modelObject: T) {
       return getRepository(entitySchema).update(id, modelObject);
     },
-    async findById(id: number) {
-      return getRepository(entitySchema).findOne(id);
+    async findOne(id?: number | string, options?: { where: Partial<T> }) {
+      return getRepository(entitySchema).findOne(id, options);
     },
-    async findByIdOrFail(id: number) {
-      return getRepository(entitySchema).findOneOrFail(id);
+    async findOneOrFail(id?: number | string, options?: { where: Partial<T> }) {
+      return getRepository(entitySchema).findOneOrFail(id, options);
     }
   };
 }
