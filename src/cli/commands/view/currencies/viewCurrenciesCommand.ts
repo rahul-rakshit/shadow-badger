@@ -2,13 +2,20 @@ import { program } from 'commander';
 import { currencyActions } from '../../../../entity/Currency';
 import { logList } from '../../../cli-helpers/logList';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 
 export const viewCurrenciesCommand = program
   .command('currencies')
+  .storeOptionsAsProperties(false)
+  .passCommandToAction(false)
   .description('display all currencies that satisfy certain criteria')
-  .action(async () => {
+  .option('-c, --code, <code>', 'The currency code, eg. USD')
+  .option('-n, --name <name>', 'The currency name, eg. US_Dollar')
+  .option('-$, --symbol <symbol>', 'The currency symbol, eg. $')
+  .action(async (opts: { name: string; code: string; symbol: string }) => {
     try {
-      const allCurrencies = await currencyActions.findAll();
+      const allCurrencies = await currencyActions.findAll({ where: opts });
+      if (allCurrencies.length === 0) logAndExitNotFoundMessage('currency');
       logList(allCurrencies, 'currencies');
     } catch (error) {
       logAndExitOnSqlEngineError('view', 'currencies', error.message);

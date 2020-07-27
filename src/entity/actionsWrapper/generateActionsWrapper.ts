@@ -2,17 +2,15 @@ import {
   EntitySchema,
   getRepository,
   DeleteResult,
-  UpdateResult,
-  FindManyOptions,
-  FindOneOptions
+  UpdateResult
 } from 'typeorm';
 
 export interface Actions<T> {
   create: (modelObject: T) => Promise<T>;
-  findAll: (options?: FindManyOptions) => Promise<T[]>;
+  findAll: (options?: { where: Partial<T> }) => Promise<T[]>;
   delete: (id: number) => Promise<DeleteResult>;
   edit: (id: number, modelObject: T) => Promise<UpdateResult>;
-  findById: (id: number, options?: FindOneOptions) => Promise<T>;
+  findById: (id: number, options?: { where: Partial<T> }) => Promise<T>;
 }
 
 export function generateActionsWrapper<T>(
@@ -22,8 +20,8 @@ export function generateActionsWrapper<T>(
     async create(modelObject: T) {
       return getRepository(entitySchema).save(modelObject);
     },
-    async findAll() {
-      return getRepository(entitySchema).find();
+    async findAll(options?: { where: Partial<T> }) {
+      return getRepository(entitySchema).find(options);
     },
     async delete(id: number) {
       return getRepository(entitySchema).delete(id);
@@ -31,8 +29,8 @@ export function generateActionsWrapper<T>(
     async edit(id: number, modelObject: T) {
       return getRepository(entitySchema).update(id, modelObject);
     },
-    async findById(id: number) {
-      return getRepository(entitySchema).findOneOrFail(id);
+    async findById(id: number, options?: { where: Partial<T> }) {
+      return getRepository(entitySchema).findOneOrFail(id, options);
     }
   };
 }
