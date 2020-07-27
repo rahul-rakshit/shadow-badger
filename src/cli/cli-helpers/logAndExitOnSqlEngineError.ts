@@ -1,4 +1,5 @@
 import colors from 'colors';
+import { errorCodes } from './errorCodes';
 
 export function logAndExitOnSqlEngineError(
   verbPresentTense: string,
@@ -13,5 +14,5 @@ export function logAndExitOnSqlEngineError(
   console.error(mainString + reasonString);
   console.error(colors.italic(sqlError));
 
-  process.exit(8);
+  process.exit(errorCodes.sqlEngineError);
 }

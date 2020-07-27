@@ -1,5 +1,6 @@
 import colors from 'colors';
 import { ModelValidationMessageMap } from '../../validations/validations-d';
+import { errorCodes } from './errorCodes';
 
 export function logAndExitOnValidationFailure<M>(
   verbPresentTense: string,
@@ -19,5 +20,5 @@ export function logAndExitOnValidationFailure<M>(
     console.error(colors.bold(`${key}: `) + message);
   });
 
-  process.exit(2);
+  process.exit(errorCodes.validation);
 }
