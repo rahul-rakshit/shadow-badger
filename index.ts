@@ -4,6 +4,7 @@ import { program } from 'commander';
 import { addCommand } from './src/cli/commands/add/addCommand';
 import { viewCommand } from './src/cli/commands/view/viewCommand';
 import { editCommand } from './src/cli/commands/edit/editCommand';
+import { deleteCommand } from './src/cli/commands/delete/deleteCommand';
 
 async function run() {
   await createConnection({
@@ -24,6 +25,7 @@ async function run() {
   program.addCommand(addCommand);
   program.addCommand(editCommand);
   program.addCommand(viewCommand);
+  program.addCommand(deleteCommand);
 
   await program.parseAsync(process.argv);
 }
