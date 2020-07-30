@@ -5,13 +5,14 @@ import { addCommand } from './src/cli/commands/add/addCommand';
 import { viewCommand } from './src/cli/commands/view/viewCommand';
 import { editCommand } from './src/cli/commands/edit/editCommand';
 import { deleteCommand } from './src/cli/commands/delete/deleteCommand';
+import { AccountSchema } from './src/entity/Account';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
     database:
       '/Volumes/personal-code/side_projects/shadow-badger-cli/test.sqlite3',
-    entities: [CurrencySchema],
+    entities: [CurrencySchema, AccountSchema],
     logging: []
   });
 

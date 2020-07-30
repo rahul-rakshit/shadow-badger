@@ -5,9 +5,14 @@ import {
   UpdateResult
 } from 'typeorm';
 
+type AllowedRelations = 'currency' | 'account';
+
 export interface Actions<T> {
   create: (modelObject: T) => Promise<T>;
-  findAll: (options?: { where: Partial<T> }) => Promise<T[]>;
+  findAll: (options?: {
+    where?: Partial<T>;
+    relations?: AllowedRelations[];
+  }) => Promise<T[]>;
   delete: (id: number | string) => Promise<DeleteResult>;
   edit: (id: number | string, modelObject: T) => Promise<UpdateResult>;
   findOne: (
@@ -27,7 +32,10 @@ export function generateActionsWrapper<T>(
     async create(modelObject: T) {
       return getRepository(entitySchema).save(modelObject);
     },
-    async findAll(options?: { where: Partial<T> }) {
+    async findAll(options?: {
+      where?: Partial<T>;
+      relations?: AllowedRelations[];
+    }) {
       return getRepository(entitySchema).find(options);
     },
     async delete(id: number | string) {
