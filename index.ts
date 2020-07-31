@@ -6,13 +6,15 @@ import { viewCommand } from './src/cli/commands/view/viewCommand';
 import { editCommand } from './src/cli/commands/edit/editCommand';
 import { deleteCommand } from './src/cli/commands/delete/deleteCommand';
 import { AccountSchema } from './src/entity/Account';
+import { CategorySchema } from './src/entity/Category';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
     database:
       '/Volumes/personal-code/side_projects/shadow-badger-cli/test.sqlite3',
-    entities: [CurrencySchema, AccountSchema]
+    entities: [CurrencySchema, AccountSchema, CategorySchema],
+    synchronize: true
   });
 
   program.storeOptionsAsProperties(false).passCommandToAction(false);

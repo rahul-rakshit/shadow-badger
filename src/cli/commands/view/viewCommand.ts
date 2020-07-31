@@ -3,6 +3,8 @@ import { viewCurrenciesCommand } from './currencies/viewCurrenciesCommand';
 import { viewCurrencyCommand } from './currencies/viewCurrencyCommand';
 import { viewAccountsCommand } from './accounts/viewAccountsCommand';
 import { viewAccountCommand } from './accounts/viewAccountCommand';
+import { viewCategoriesCommand } from './categories/viewCategoriesCommand';
+import { viewCategoryCommand } from './categories/viewCategoryCommand';
 
 export const viewCommand = program
   .command('view <model>')
@@ -10,4 +12,6 @@ export const viewCommand = program
   .addCommand(viewCurrencyCommand)
   .addCommand(viewCurrenciesCommand)
   .addCommand(viewAccountCommand)
-  .addCommand(viewAccountsCommand);
+  .addCommand(viewAccountsCommand)
+  .addCommand(viewCategoryCommand)
+  .addCommand(viewCategoriesCommand);
