@@ -11,7 +11,6 @@ export interface Account {
   id?: string;
   name?: string;
   code?: string;
-  description?: string;
   currency?: Currency;
 }
 
@@ -24,8 +23,7 @@ export const AccountSchema = new EntitySchema<Account>({
       generated: true
     },
     name: { type: 'varchar' },
-    code: { type: 'varchar' },
-    description: { type: 'varchar', nullable: true }
+    code: { type: 'varchar' }
   },
   uniques: [
     {

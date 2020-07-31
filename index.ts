@@ -12,8 +12,7 @@ async function run() {
     type: 'sqlite',
     database:
       '/Volumes/personal-code/side_projects/shadow-badger-cli/test.sqlite3',
-    entities: [CurrencySchema, AccountSchema],
-    logging: []
+    entities: [CurrencySchema, AccountSchema]
   });
 
   program.storeOptionsAsProperties(false).passCommandToAction(false);

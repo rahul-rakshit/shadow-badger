@@ -1,0 +1,68 @@
+import { program } from 'commander';
+import {
+  accountActions,
+  Account,
+  accountValidatorMap
+} from '../../../../entity/Account';
+import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
+import { currencyActions } from '../../../../entity/Currency';
+import { validateModelObject } from '../../../../validations/validateModelObject';
+import { failed } from '../../../../types-d';
+import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
+import { logSuccess } from '../../../cli-helpers/logSuccess';
+import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+
+export const editAccountCommand = program
+  .command('account')
+  .storeOptionsAsProperties(false)
+  .passCommandToAction(false)
+  .description('find an existing account by id and update passed values')
+  .requiredOption('-id, --id, <id>', 'The account id')
+  .option('-c, --code, <code>', 'The account code, eg. MNZO')
+  .option('-n, --name <name>', 'The account name, eg. Monzo')
+  .option('-cId, --currency-id <currencyId>', "The related currency's id")
+  .action(
+    async ({
+      id,
+      code,
+      name,
+      currencyId
+    }: {
+      id: string;
+      code?: string;
+      name?: string;
+      currencyId?: string;
+    }) => {
+      try {
+        const foundAccount = await accountActions.findOne(id, {
+          relations: ['currency']
+        });
+        if (!foundAccount) logAndExitNotFoundMessage('account', id);
+        const account = foundAccount as Account;
+
+        if (code) account.code = code;
+        if (name) account.name = name;
+        if (currencyId) {
+          const foundCurrency = await currencyActions.findOne(currencyId);
+          if (!foundCurrency) logAndExitNotFoundMessage('currency', currencyId);
+          else account.currency = foundCurrency;
+        }
+
+        const validation = validateModelObject<Account>(
+          account,
+          accountValidatorMap
+        );
+
+        if (failed(validation)) {
+          const messageMap = validation.value;
+          logAndExitOnValidationFailure<Account>('edit', 'account', messageMap);
+        }
+
+        await accountActions.edit(id, account);
+
+        logSuccess('edited', 'account', `with id ${id}`);
+      } catch (error) {
+        logAndExitOnSqlEngineError('edit', 'account', error.message);
+      }
+    }
+  );

@@ -23,24 +23,21 @@ export const addAccountCommand = program
     '-cId, --currency-id <currencyId>',
     "The related currency's id"
   )
-  .option('-d, --description <description>', 'The account description')
   .action(
     async ({
       code,
       name,
-      currencyId,
-      description
+      currencyId
     }: {
       code: string;
       name: string;
       currencyId: string;
-      description?: string;
     }) => {
       try {
         const currency = await currencyActions.findOne(currencyId);
         if (!currency) logAndExitNotFoundMessage('currency', currencyId);
 
-        const newAccount: Account = { code, name, description, currency };
+        const newAccount: Account = { code, name, currency };
         const validation = validateModelObject<Account>(
           newAccount,
           accountValidatorMap
