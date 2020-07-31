@@ -3,6 +3,7 @@ import { currencyActions, Currency } from '../../../../entity/Currency';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logObject } from '../../../cli-helpers/logObject';
+import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
 
 export const viewCurrencyCommand = program
   .command('currency')
@@ -21,12 +22,13 @@ export const viewCurrencyCommand = program
       symbol?: string;
     }) => {
       const { name, code, symbol, id } = opts;
+      if (!id && !name && !code && !symbol) logAndExitNoFilterCriteria();
 
       try {
         const foundCurrency = id
           ? await currencyActions.findOne(id)
           : await currencyActions.findOne(undefined, {
-              where: { name, code, symbol }
+              where: opts
             });
 
         if (!foundCurrency) logAndExitNotFoundMessage('currency', opts.id);
