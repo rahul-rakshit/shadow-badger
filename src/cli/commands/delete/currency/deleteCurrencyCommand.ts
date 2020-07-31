@@ -11,7 +11,7 @@ export const deleteCurrencyCommand = program
   .storeOptionsAsProperties(false)
   .passCommandToAction(false)
   .description('delete a currency')
-  .requiredOption('-id, --id, <id>', 'The id of the currency to edit')
+  .requiredOption('-id, --id, <id>', 'The id of the currency to delete')
   .action(async ({ id }: { id: string }) => {
     try {
       const foundCurrency = await currencyActions.findOne(id);
@@ -33,6 +33,6 @@ export const deleteCurrencyCommand = program
       await currencyActions.delete(id);
       logSuccess('deleted', 'currency', `with id ${id}`);
     } catch (error) {
-      logAndExitOnSqlEngineError('add', 'currency', error.message);
+      logAndExitOnSqlEngineError('delete', 'currency', error.message);
     }
   });
