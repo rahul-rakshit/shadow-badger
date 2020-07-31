@@ -17,11 +17,17 @@ export interface Actions<T> {
   edit: (id: number | string, modelObject: T) => Promise<UpdateResult>;
   findOne: (
     id?: number | string,
-    options?: { where: Partial<T> & { id?: number | string } }
+    options?: {
+      where?: Partial<T>;
+      relations?: AllowedRelations[];
+    }
   ) => Promise<T | undefined>;
   findOneOrFail: (
     id?: number | string,
-    options?: { where: Partial<T> & { id?: number | string } }
+    options?: {
+      where?: Partial<T>;
+      relations?: AllowedRelations[];
+    }
   ) => Promise<T>;
 }
 
@@ -44,10 +50,22 @@ export function generateActionsWrapper<T>(
     async edit(id: number | string, modelObject: T) {
       return getRepository(entitySchema).update(id, modelObject);
     },
-    async findOne(id?: number | string, options?: { where: Partial<T> }) {
+    async findOne(
+      id?: number | string,
+      options?: {
+        where?: Partial<T>;
+        relations?: AllowedRelations[];
+      }
+    ) {
       return getRepository(entitySchema).findOne(id, options);
     },
-    async findOneOrFail(id?: number | string, options?: { where: Partial<T> }) {
+    async findOneOrFail(
+      id?: number | string,
+      options?: {
+        where?: Partial<T>;
+        relations?: AllowedRelations[];
+      }
+    ) {
       return getRepository(entitySchema).findOneOrFail(id, options);
     }
   };
