@@ -21,13 +21,8 @@ export const deleteCurrencyCommand = program
         where: { currency: foundCurrency }
       });
       if (dependingAccount) {
-        logAndExitHasDependingEntry(
-          'delete',
-          'currency',
-          foundCurrency?.id as string,
-          'account',
-          dependingAccount?.id as string
-        );
+        const currencyId = foundCurrency?.id as string;
+        logAndExitHasDependingEntry('delete', 'currency', currencyId);
       }
 
       await currencyActions.delete(id);

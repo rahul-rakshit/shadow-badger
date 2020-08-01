@@ -4,14 +4,12 @@ import { errorCodes } from './errorCodes';
 export function logAndExitHasDependingEntry(
   verbPresentTense: string,
   modelName: string,
-  id: string,
-  dependentModelName: string,
-  dependentId: string
+  id: string
 ) {
   console.error(
     colors.bold.red(
       `Can't ${verbPresentTense} ${modelName} with id ${id} because ` +
-        `${dependentModelName} with id ${dependentId} depends on it.`
+        'there are entries depending on it.'
     )
   );
   process.exit(errorCodes.hasDependingEntry);
