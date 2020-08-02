@@ -7,7 +7,7 @@ import { allCaps } from '../validations/validationBuilders/allCaps';
 import { generateActionsWrapper } from './actionsWrapper/generateActionsWrapper';
 
 export interface Currency {
-  id?: string;
+  id?: number;
   name?: string;
   code?: string;
   symbol?: string;

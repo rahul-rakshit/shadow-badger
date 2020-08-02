@@ -21,20 +21,19 @@ export const editCurrencyCommand = program
   .option('-n, --name <name>', 'The currency name, eg. US_Dollar')
   .option('-$, --symbol <symbol>', 'The currency symbol, eg. $')
   .action(
-    async ({
-      id,
-      name,
-      code,
-      symbol
-    }: {
+    async (opts: {
       id: string;
       name?: string;
       code?: string;
       symbol?: string;
     }) => {
+      const idString = opts.id;
+      const id = Number(idString);
+      const { name, code, symbol } = opts;
+
       try {
         const foundCurrency = await currencyActions.findOne(id);
-        if (!foundCurrency) logAndExitNotFoundMessage('currency', id);
+        if (!foundCurrency) logAndExitNotFoundMessage('currency', idString);
         const currency = foundCurrency as Currency;
 
         if (name) currency.name = name;

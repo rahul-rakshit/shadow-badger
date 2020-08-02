@@ -8,7 +8,7 @@ import { generateActionsWrapper } from './actionsWrapper/generateActionsWrapper'
 import { Currency } from './Currency';
 
 export interface Account {
-  id?: string;
+  id?: number;
   name?: string;
   code?: string;
   currency?: Currency;

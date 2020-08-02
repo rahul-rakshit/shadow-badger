@@ -13,17 +13,17 @@ export interface Actions<T> {
     where?: Partial<T>;
     relations?: AllowedRelations[];
   }) => Promise<T[]>;
-  delete: (id: number | string) => Promise<DeleteResult>;
-  edit: (id: number | string, modelObject: T) => Promise<UpdateResult>;
+  delete: (id: number) => Promise<DeleteResult>;
+  edit: (id: number, modelObject: T) => Promise<UpdateResult>;
   findOne: (
-    id?: number | string,
+    id?: number,
     options?: {
       where?: Partial<T>;
       relations?: AllowedRelations[];
     }
   ) => Promise<T | undefined>;
   findOneOrFail: (
-    id?: number | string,
+    id?: number,
     options?: {
       where?: Partial<T>;
       relations?: AllowedRelations[];
@@ -44,14 +44,14 @@ export function generateActionsWrapper<T>(
     }) {
       return getRepository(entitySchema).find(options);
     },
-    async delete(id: number | string) {
+    async delete(id: number) {
       return getRepository(entitySchema).delete(id);
     },
-    async edit(id: number | string, modelObject: T) {
+    async edit(id: number, modelObject: T) {
       return getRepository(entitySchema).update(id, modelObject);
     },
     async findOne(
-      id?: number | string,
+      id?: number,
       options?: {
         where?: Partial<T>;
         relations?: AllowedRelations[];
@@ -60,7 +60,7 @@ export function generateActionsWrapper<T>(
       return getRepository(entitySchema).findOne(id, options);
     },
     async findOneOrFail(
-      id?: number | string,
+      id?: number,
       options?: {
         where?: Partial<T>;
         relations?: AllowedRelations[];

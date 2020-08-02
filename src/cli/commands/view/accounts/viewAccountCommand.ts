@@ -4,6 +4,7 @@ import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSql
 import { logObject } from '../../../cli-helpers/logObject';
 import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
 import { accountActions, Account } from '../../../../entity/Account';
+import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 
 export const viewAccountCommand = program
   .command('account')
@@ -13,29 +14,25 @@ export const viewAccountCommand = program
   .option('-id, --id, <id>', 'The id of the currency')
   .option('-c, --code, <code>', 'The account code, eg. MNZO')
   .option('-n, --name <name>', 'The account name, eg. Monzo')
-  .action(
-    async (opts: {
-      id?: string;
-      name?: string;
-      code?: string;
-      symbol?: string;
-    }) => {
-      const { id, name, code } = opts;
-      if (!id && !name && !code) logAndExitNoFilterCriteria();
+  .action(async (opts: { id?: string; name?: string; code?: string }) => {
+    const { name, code } = opts;
+    const idString = opts.id;
+    const id = Number(idString);
 
-      try {
-        const foundAccount = id
-          ? await accountActions.findOne(id)
-          : await accountActions.findOne(undefined, {
-              where: opts,
-              relations: ['currency']
-            });
+    if (!idString && !name && !code) logAndExitNoFilterCriteria();
 
-        if (!foundAccount) logAndExitNotFoundMessage('account', opts.id);
+    try {
+      const foundAccount = id
+        ? await accountActions.findOne(id)
+        : await accountActions.findOne(undefined, {
+            where: parseDefinedOpts({ name, code }),
+            relations: ['currency']
+          });
 
-        logObject(foundAccount as Account, 'account');
-      } catch (error) {
-        logAndExitOnSqlEngineError('view', 'account', error.message);
-      }
+      if (!foundAccount) logAndExitNotFoundMessage('account', opts.id);
+
+      logObject(foundAccount as Account, 'account');
+    } catch (error) {
+      logAndExitOnSqlEngineError('view', 'account', error.message);
     }
-  );
+  });

@@ -23,35 +23,28 @@ export const addAccountCommand = program
     '-cId, --currency-id <currencyId>',
     "The related currency's id"
   )
-  .action(
-    async ({
-      code,
-      name,
-      currencyId
-    }: {
-      code: string;
-      name: string;
-      currencyId: string;
-    }) => {
-      try {
-        const currency = await currencyActions.findOne(currencyId);
-        if (!currency) logAndExitNotFoundMessage('currency', currencyId);
+  .action(async (opts: { code: string; name: string; currencyId: string }) => {
+    const { code, name } = opts;
+    const currencyIdString = opts.currencyId;
+    const currencyId = Number(currencyIdString);
+    try {
+      const currency = await currencyActions.findOne(currencyId);
+      if (!currency) logAndExitNotFoundMessage('currency', currencyIdString);
 
-        const newAccount: Account = { code, name, currency };
-        const validation = validateModelObject<Account>(
-          newAccount,
-          accountValidatorMap
-        );
+      const newAccount: Account = { code, name, currency };
+      const validation = validateModelObject<Account>(
+        newAccount,
+        accountValidatorMap
+      );
 
-        if (failed(validation)) {
-          const messageMap = validation.value;
-          logAndExitOnValidationFailure<Account>('add', 'account', messageMap);
-        } else {
-          const { id } = await accountActions.create(newAccount);
-          logSuccess('added', 'account', `with id ${id}`);
-        }
-      } catch (error) {
-        logAndExitOnSqlEngineError('add', 'account', error.message);
+      if (failed(validation)) {
+        const messageMap = validation.value;
+        logAndExitOnValidationFailure<Account>('add', 'account', messageMap);
+      } else {
+        const { id } = await accountActions.create(newAccount);
+        logSuccess('added', 'account', `with id ${id}`);
       }
+    } catch (error) {
+      logAndExitOnSqlEngineError('add', 'account', error.message);
     }
-  );
+  });

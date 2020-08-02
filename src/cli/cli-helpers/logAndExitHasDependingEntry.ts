@@ -4,7 +4,7 @@ import { errorCodes } from './errorCodes';
 export function logAndExitHasDependingEntry(
   verbPresentTense: string,
   modelName: string,
-  id: string
+  id: number
 ) {
   console.error(
     colors.bold.red(

@@ -4,6 +4,7 @@ import { categoryActions, Category } from '../../../../entity/Category';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logObject } from '../../../cli-helpers/logObject';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 
 export const viewCategoryCommand = program
   .command('category')
@@ -21,14 +22,19 @@ export const viewCategoryCommand = program
       code?: string;
       description?: string;
     }) => {
-      const { name, code, description, id } = opts;
-      if (!id && !name && !code && !description) logAndExitNoFilterCriteria();
+      const { name, code, description } = opts;
+      const idString = opts.id;
+      const id = Number(idString);
+
+      if (!idString && !name && !code && !description) {
+        logAndExitNoFilterCriteria();
+      }
 
       try {
         const foundCategory = id
           ? await categoryActions.findOne(id)
           : await categoryActions.findOne(undefined, {
-              where: opts
+              where: parseDefinedOpts({ name, code, description })
             });
 
         if (!foundCategory) logAndExitNotFoundMessage('category', opts.id);

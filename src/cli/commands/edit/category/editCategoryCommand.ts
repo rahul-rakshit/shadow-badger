@@ -21,20 +21,19 @@ export const editCategoryCommand = program
   .option('-n, --name <name>', 'The category name, eg. Groceries')
   .option('-d, --description <description>', 'The category description')
   .action(
-    async ({
-      id,
-      code,
-      name,
-      description
-    }: {
+    async (opts: {
       id: string;
       code?: string;
       name?: string;
       description?: string;
     }) => {
+      const { code, name, description } = opts;
+      const idString = opts.id;
+      const id = Number(idString);
+
       try {
         const foundCategory = await categoryActions.findOne(id);
-        if (!foundCategory) logAndExitNotFoundMessage('category', id);
+        if (!foundCategory) logAndExitNotFoundMessage('category', idString);
         const category = foundCategory as Category;
 
         if (code) category.code = code;

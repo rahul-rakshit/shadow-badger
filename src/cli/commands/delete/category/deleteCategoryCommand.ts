@@ -10,10 +10,11 @@ export const deleteCategoryCommand = program
   .passCommandToAction(false)
   .description('delete a category')
   .requiredOption('-id, --id, <id>', 'The id of the category to delete')
-  .action(async ({ id }: { id: string }) => {
+  .action(async ({ id: idString }: { id: string }) => {
+    const id = Number(idString);
     try {
       const foundCategory = await categoryActions.findOne(id);
-      if (!foundCategory) logAndExitNotFoundMessage('category', id);
+      if (!foundCategory) logAndExitNotFoundMessage('category', idString);
 
       await categoryActions.delete(id);
       logSuccess('deleted', 'category', `with id ${id}`);

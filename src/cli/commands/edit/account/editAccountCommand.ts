@@ -22,29 +22,31 @@ export const editAccountCommand = program
   .option('-n, --name <name>', 'The account name, eg. Monzo')
   .option('-cId, --currency-id <currencyId>', "The related currency's id")
   .action(
-    async ({
-      id,
-      code,
-      name,
-      currencyId
-    }: {
+    async (opts: {
       id: string;
       code?: string;
       name?: string;
       currencyId?: string;
     }) => {
+      const idString = opts.id;
+      const id = Number(idString);
+      const currencyIdString = opts.currencyId;
+      const currencyId = Number(currencyIdString);
+      const { code, name } = opts;
+
       try {
         const foundAccount = await accountActions.findOne(id, {
           relations: ['currency']
         });
-        if (!foundAccount) logAndExitNotFoundMessage('account', id);
+        if (!foundAccount) logAndExitNotFoundMessage('account', idString);
         const account = foundAccount as Account;
 
         if (code) account.code = code;
         if (name) account.name = name;
         if (currencyId) {
           const foundCurrency = await currencyActions.findOne(currencyId);
-          if (!foundCurrency) logAndExitNotFoundMessage('currency', currencyId);
+          if (!foundCurrency)
+            logAndExitNotFoundMessage('currency', currencyIdString);
           else account.currency = foundCurrency;
         }
 

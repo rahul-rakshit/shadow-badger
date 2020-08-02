@@ -4,6 +4,7 @@ import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFou
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logObject } from '../../../cli-helpers/logObject';
 import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
+import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 
 export const viewCurrencyCommand = program
   .command('currency')
@@ -21,14 +22,17 @@ export const viewCurrencyCommand = program
       code?: string;
       symbol?: string;
     }) => {
-      const { name, code, symbol, id } = opts;
-      if (!id && !name && !code && !symbol) logAndExitNoFilterCriteria();
+      const { name, code, symbol } = opts;
+      const idString = opts.id;
+      const id = Number(idString);
+
+      if (!idString && !name && !code && !symbol) logAndExitNoFilterCriteria();
 
       try {
         const foundCurrency = id
           ? await currencyActions.findOne(id)
           : await currencyActions.findOne(undefined, {
-              where: opts
+              where: parseDefinedOpts({ name, code, symbol })
             });
 
         if (!foundCurrency) logAndExitNotFoundMessage('currency', opts.id);

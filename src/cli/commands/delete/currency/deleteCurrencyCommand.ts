@@ -12,16 +12,17 @@ export const deleteCurrencyCommand = program
   .passCommandToAction(false)
   .description('delete a currency')
   .requiredOption('-id, --id, <id>', 'The id of the currency to delete')
-  .action(async ({ id }: { id: string }) => {
+  .action(async ({ id: idString }: { id: string }) => {
     try {
+      const id = Number(idString);
       const foundCurrency = await currencyActions.findOne(id);
-      if (!foundCurrency) logAndExitNotFoundMessage('currency', id);
+      if (!foundCurrency) logAndExitNotFoundMessage('currency', idString);
 
       const dependingAccount = await accountActions.findOne(undefined, {
         where: { currency: foundCurrency }
       });
       if (dependingAccount) {
-        const currencyId = foundCurrency?.id as string;
+        const currencyId = foundCurrency?.id as number;
         logAndExitHasDependingEntry('delete', 'currency', currencyId);
       }
 
