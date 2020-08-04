@@ -1,10 +1,11 @@
 import { program } from 'commander';
-import { currencyActions, Currency } from '../../../../entity/Currency';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logObject } from '../../../cli-helpers/logObject';
 import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
 import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
+import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { Currency } from '../../../../entity/Currency/Currency-d';
 
 export const viewCurrencyCommand = program
   .command('currency')

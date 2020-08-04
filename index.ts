@@ -1,19 +1,19 @@
 import { createConnection } from 'typeorm';
-import { CurrencySchema } from './src/entity/Currency';
 import { program } from 'commander';
 import { addCommand } from './src/cli/commands/add/addCommand';
 import { viewCommand } from './src/cli/commands/view/viewCommand';
 import { editCommand } from './src/cli/commands/edit/editCommand';
 import { deleteCommand } from './src/cli/commands/delete/deleteCommand';
-import { AccountSchema } from './src/entity/Account';
-import { CategorySchema } from './src/entity/Category';
+import { categorySchema } from './src/entity/Category/categorySchema';
+import { accountSchema } from './src/entity/Account/accountSchema';
+import { currencySchema } from './src/entity/Currency/currencySchema';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
     database:
       '/Volumes/personal-code/side_projects/shadow-badger-cli/test.sqlite3',
-    entities: [CurrencySchema, AccountSchema, CategorySchema],
+    entities: [currencySchema, accountSchema, categorySchema],
     synchronize: true
   });
 

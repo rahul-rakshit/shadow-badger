@@ -1,8 +1,8 @@
 import { program } from 'commander';
-import { accountActions } from '../../../../entity/Account';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logList } from '../../../cli-helpers/logList';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { accountActions } from '../../../../entity/Account/accountActions';
 
 export const viewAccountsCommand = program
   .command('accounts')

@@ -1,8 +1,8 @@
 import { program } from 'commander';
-import { categoryActions } from '../../../../entity/Category';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logList } from '../../../cli-helpers/logList';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { categoryActions } from '../../../../entity/Category/categoryActions';
 
 export const viewCategoriesCommand = program
   .command('categories')

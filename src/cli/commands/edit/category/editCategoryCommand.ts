@@ -1,15 +1,13 @@
 import { program } from 'commander';
-import {
-  categoryActions,
-  Category,
-  categoryValidatorMap
-} from '../../../../entity/Category';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
 import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { Category } from '../../../../entity/Category/Category-d';
+import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
 
 export const editCategoryCommand = program
   .command('category')

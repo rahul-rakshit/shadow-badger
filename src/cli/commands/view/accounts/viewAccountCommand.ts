@@ -3,8 +3,9 @@ import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFou
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logObject } from '../../../cli-helpers/logObject';
 import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
-import { accountActions, Account } from '../../../../entity/Account';
 import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
+import { Account } from '../../../../entity/Account/Account-d';
+import { accountActions } from '../../../../entity/Account/accountActions';
 
 export const viewAccountCommand = program
   .command('account')

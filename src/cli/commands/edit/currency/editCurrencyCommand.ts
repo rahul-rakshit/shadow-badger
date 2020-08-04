@@ -1,15 +1,13 @@
 import { program } from 'commander';
-import {
-  Currency,
-  currencyActions,
-  currencyValidatorMap
-} from '../../../../entity/Currency';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
 import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
+import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { Currency } from '../../../../entity/Currency/Currency-d';
+import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
 
 export const editCurrencyCommand = program
   .command('currency')

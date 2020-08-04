@@ -1,16 +1,14 @@
 import { program } from 'commander';
 import { validateModelObject } from '../../../../validations/validateModelObject';
-import {
-  Account,
-  accountValidatorMap,
-  accountActions
-} from '../../../../entity/Account';
 import { failed } from '../../../../types-d';
 import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { currencyActions } from '../../../../entity/Currency';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
+import { Account } from '../../../../entity/Account/Account-d';
+import { accountValidatorMap } from '../../../../entity/Account/accountValidatorMap';
+import { accountActions } from '../../../../entity/Account/accountActions';
+import { currencyActions } from '../../../../entity/Currency/currencyActions';
 
 export const addAccountCommand = program
   .command('account')

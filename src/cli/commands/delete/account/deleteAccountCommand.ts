@@ -2,7 +2,7 @@ import { program } from 'commander';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { accountActions } from '../../../../entity/Account';
+import { accountActions } from '../../../../entity/Account/accountActions';
 
 export const deleteAccountCommand = program
   .command('account')

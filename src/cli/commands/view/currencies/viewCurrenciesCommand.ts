@@ -1,8 +1,8 @@
 import { program } from 'commander';
-import { currencyActions } from '../../../../entity/Currency';
 import { logList } from '../../../cli-helpers/logList';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
+import { currencyActions } from '../../../../entity/Currency/currencyActions';
 
 export const viewCurrenciesCommand = program
   .command('currencies')

@@ -1,10 +1,10 @@
 import { program } from 'commander';
-import { currencyActions } from '../../../../entity/Currency';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { accountActions } from '../../../../entity/Account';
 import { logAndExitHasDependingEntry } from '../../../cli-helpers/logAndExitHasDependingEntry';
+import { accountActions } from '../../../../entity/Account/accountActions';
+import { currencyActions } from '../../../../entity/Currency/currencyActions';
 
 export const deleteCurrencyCommand = program
   .command('currency')

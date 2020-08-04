@@ -1,8 +1,8 @@
 import { program } from 'commander';
-import { categoryActions } from '../../../../entity/Category';
 import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { categoryActions } from '../../../../entity/Category/categoryActions';
 
 export const deleteCategoryCommand = program
   .command('category')
