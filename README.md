@@ -6,7 +6,7 @@ This is a command line tool to manage a shadow budget. It is currently in active
 
 This is the planned domain model.
 
-```puml
+```plantuml
 class Currency << (1, yellow) >> {
   {field} #id: number;
   {field} -created_at: Date;
