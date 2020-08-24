@@ -9,8 +9,8 @@ export const accountSchema = new EntitySchema<Account>({
       primary: true,
       generated: true
     },
-    name: { type: 'varchar' },
-    code: { type: 'varchar' }
+    name: { type: String },
+    code: { type: String }
   },
   uniques: [
     {

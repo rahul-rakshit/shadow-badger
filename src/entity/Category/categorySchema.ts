@@ -9,9 +9,9 @@ export const categorySchema = new EntitySchema<Category>({
       primary: true,
       generated: true
     },
-    name: { type: 'varchar' },
-    code: { type: 'varchar' },
-    description: { type: 'varchar' }
+    name: { type: String },
+    code: { type: String },
+    description: { type: String }
   },
   uniques: [
     {

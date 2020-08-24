@@ -6,9 +6,9 @@ export const currencySchema = new EntitySchema<Currency>({
   name: 'currency',
   columns: {
     ...idColumn,
-    name: { type: 'varchar' },
-    code: { type: 'varchar' },
-    symbol: { type: 'varchar' },
+    name: { type: String },
+    code: { type: String },
+    symbol: { type: String },
     ...schemaCoreColumns
   },
   uniques: [
