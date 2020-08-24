@@ -14,7 +14,7 @@ export interface Actions<T> {
     relations?: AllowedRelations[];
   }) => Promise<T[]>;
   delete: (id: number) => Promise<DeleteResult>;
-  edit: (id: number, modelObject: T) => Promise<UpdateResult>;
+  edit: (updatedObject: T) => Promise<UpdateResult>;
   findOne: (
     id?: number,
     options?: {
@@ -47,8 +47,8 @@ export function generateActionsWrapper<T>(
     async delete(id: number) {
       return getRepository(entitySchema).delete(id);
     },
-    async edit(id: number, modelObject: T) {
-      return getRepository(entitySchema).update(id, modelObject);
+    async edit(updatedObject: T): Promise<any> {
+      return getRepository(entitySchema).save(updatedObject);
     },
     async findOne(
       id?: number,

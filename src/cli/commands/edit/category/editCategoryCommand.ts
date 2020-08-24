@@ -52,7 +52,7 @@ export const editCategoryCommand = program
           );
         }
 
-        await categoryActions.edit(id, category);
+        await categoryActions.edit(category);
 
         logSuccess('edited', 'category', `with id ${id}`);
       } catch (error) {

@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "author": "Rahul Rakshit",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll=true",
     "lint": "eslint ./src --ext .ts",
     "build": "tsc"
   },

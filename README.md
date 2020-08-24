@@ -8,14 +8,14 @@ This is the planned domain model.
 
 ```plantuml
 class Currency << (1, yellow) >> {
-  {field} #id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
+  {field} +id: number;
+  {field} +created_at: Date;
+  {field} +updated_at: Date;
+  {field} +version: number;
   ..
-  {field} #code: string; (unique)
-  {field} #name: string;
-  {field} #symbol: string;
+  {field} +code: string; (unique)
+  {field} +name: string;
+  {field} +symbol: string;
   {field} -description?: string;
 }
 

@@ -16,7 +16,15 @@ export const viewCurrenciesCommand = program
     try {
       const allCurrencies = await currencyActions.findAll({ where: opts });
       if (allCurrencies.length === 0) logAndExitNotFoundMessage('currency');
-      logList(allCurrencies, 'currencies', opts);
+
+      const loggable = allCurrencies.map((currency) => ({
+        id: currency.id,
+        name: currency.name,
+        code: currency.code,
+        symbol: currency.symbol
+      }));
+
+      logList(loggable, 'currencies', opts);
     } catch (error) {
       logAndExitOnSqlEngineError('view', 'currencies', error.message);
     }

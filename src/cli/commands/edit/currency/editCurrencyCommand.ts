@@ -52,7 +52,7 @@ export const editCurrencyCommand = program
           );
         }
 
-        await currencyActions.edit(id, currency);
+        await currencyActions.edit(currency);
 
         logSuccess('edited', 'currency', `with id ${id}`);
       } catch (error) {

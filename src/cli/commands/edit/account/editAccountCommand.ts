@@ -58,7 +58,7 @@ export const editAccountCommand = program
           logAndExitOnValidationFailure<Account>('edit', 'account', messageMap);
         }
 
-        await accountActions.edit(id, account);
+        await accountActions.edit(account);
 
         logSuccess('edited', 'account', `with id ${id}`);
       } catch (error) {
