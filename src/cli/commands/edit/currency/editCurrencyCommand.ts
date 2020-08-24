@@ -18,16 +18,18 @@ export const editCurrencyCommand = program
   .option('-c, --code, <code>', 'The currency code, eg. USD')
   .option('-n, --name <name>', 'The currency name, eg. US_Dollar')
   .option('-$, --symbol <symbol>', 'The currency symbol, eg. $')
+  .option('-d, --description <description>', 'Description field for notes')
   .action(
     async (opts: {
       id: string;
       name?: string;
       code?: string;
       symbol?: string;
+      description?: string;
     }) => {
       const idString = opts.id;
       const id = Number(idString);
-      const { name, code, symbol } = opts;
+      const { name, code, symbol, description } = opts;
 
       try {
         const foundCurrency = await currencyActions.findOne(id);
@@ -37,6 +39,7 @@ export const editCurrencyCommand = program
         if (name) currency.name = name;
         if (code) currency.code = code;
         if (symbol) currency.symbol = symbol;
+        if (description) currency.description = description;
 
         const validation = validateModelObject<Currency>(
           currency,

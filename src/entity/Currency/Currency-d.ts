@@ -4,6 +4,7 @@ interface CurrencyDomainFields {
   name?: string;
   code?: string;
   symbol?: string;
+  description?: string;
 }
 
 export type Currency = { id?: number } & CurrencyDomainFields & DbCoreFields;

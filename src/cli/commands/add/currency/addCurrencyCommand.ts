@@ -16,22 +16,30 @@ export const addCurrencyCommand = program
   .requiredOption('-c, --code, <code>', 'The currency code, eg. USD')
   .requiredOption('-n, --name <name>', 'The currency name, eg. US_Dollar')
   .requiredOption('-$, --symbol <symbol>', 'The currency symbol, eg. $')
-  .action(async (opts: { name: string; code: string; symbol: string }) => {
-    const newCurrency: Currency = opts;
-    const validation = validateModelObject<Currency>(
-      newCurrency,
-      currencyValidatorMap
-    );
+  .option('-d, --description <description>', 'Description field for notes')
+  .action(
+    async (opts: {
+      name: string;
+      code: string;
+      symbol: string;
+      description?: string;
+    }) => {
+      const newCurrency: Currency = opts;
+      const validation = validateModelObject<Currency>(
+        newCurrency,
+        currencyValidatorMap
+      );
 
-    if (failed(validation)) {
-      const messageMap = validation.value;
-      logAndExitOnValidationFailure<Currency>('add', 'currency', messageMap);
-    } else {
-      try {
-        const { id } = await currencyActions.create(newCurrency);
-        logSuccess('added', 'currency', `with id ${id}`);
-      } catch (error) {
-        logAndExitOnSqlEngineError('add', 'currency', error.message);
+      if (failed(validation)) {
+        const messageMap = validation.value;
+        logAndExitOnValidationFailure<Currency>('add', 'currency', messageMap);
+      } else {
+        try {
+          const { id } = await currencyActions.create(newCurrency);
+          logSuccess('added', 'currency', `with id ${id}`);
+        } catch (error) {
+          logAndExitOnSqlEngineError('add', 'currency', error.message);
+        }
       }
     }
-  });
+  );
