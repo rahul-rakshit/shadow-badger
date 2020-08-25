@@ -1,11 +1,15 @@
 import { program } from 'commander';
-import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logObject } from '../../../cli-helpers/logObject';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
 import { Category } from '../../../../entity/Category/Category-d';
+import { processUtil } from '../../../cli-helpers/processUtil';
+
+const {
+  logAndExitNoFilterCriteria,
+  logAndExitNotFoundMessage,
+  logObject,
+  logAndExitOnSqlEngineError
+} = processUtil;
 
 export const viewCategoryCommand = program
   .command('category')

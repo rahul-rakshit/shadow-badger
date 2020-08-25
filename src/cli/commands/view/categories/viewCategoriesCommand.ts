@@ -1,8 +1,12 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logList } from '../../../cli-helpers/logList';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil } from '../../../cli-helpers/processUtil';
+
+const {
+  logAndExitNotFoundMessage,
+  logList,
+  logAndExitOnSqlEngineError
+} = processUtil;
 
 export const viewCategoriesCommand = program
   .command('categories')

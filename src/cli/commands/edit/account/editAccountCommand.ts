@@ -1,15 +1,11 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { Account } from '../../../../entity/Account/Account-d';
 import { accountActions } from '../../../../entity/Account/accountActions';
 import { accountValidatorMap } from '../../../../entity/Account/accountValidatorMap';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
-
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 export const editAccountCommand = program
   .command('account')
   .storeOptionsAsProperties(false)
@@ -36,7 +32,7 @@ export const editAccountCommand = program
         const foundAccount = await accountActions.findOne(id, {
           relations: ['currency']
         });
-        if (!foundAccount) logAndExitNotFoundMessage('account', idString);
+        if (!foundAccount) $.logAndExitNotFoundMessage('account', idString);
         const account = foundAccount as Account;
 
         if (code) account.code = code;
@@ -44,7 +40,7 @@ export const editAccountCommand = program
         if (currencyId) {
           const foundCurrency = await currencyActions.findOne(currencyId);
           if (!foundCurrency)
-            logAndExitNotFoundMessage('currency', currencyIdString);
+            $.logAndExitNotFoundMessage('currency', currencyIdString);
           else account.currency = foundCurrency;
         }
 
@@ -55,14 +51,18 @@ export const editAccountCommand = program
 
         if (failed(validation)) {
           const messageMap = validation.value;
-          logAndExitOnValidationFailure<Account>('edit', 'account', messageMap);
+          $.logAndExitOnValidationFailure<Account>(
+            'edit',
+            'account',
+            messageMap
+          );
         }
 
         await accountActions.edit(account);
 
-        logSuccess('edited', 'account', `with id ${id}`);
+        $.logSuccess('edited', 'account', `with id ${id}`);
       } catch (error) {
-        logAndExitOnSqlEngineError('edit', 'account', error.message);
+        $.logAndExitOnSqlEngineError('edit', 'account', error.message);
       }
     }
   );

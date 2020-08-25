@@ -1,8 +1,6 @@
 import { program } from 'commander';
-import { logList } from '../../../cli-helpers/logList';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const viewCurrenciesCommand = program
   .command('currencies')
@@ -15,7 +13,7 @@ export const viewCurrenciesCommand = program
   .action(async (opts: { name?: string; code?: string; symbol?: string }) => {
     try {
       const allCurrencies = await currencyActions.findAll({ where: opts });
-      if (allCurrencies.length === 0) logAndExitNotFoundMessage('currency');
+      if (allCurrencies.length === 0) $.logAndExitNotFoundMessage('currency');
 
       const loggable = allCurrencies.map((currency) => ({
         id: currency.id,
@@ -24,8 +22,8 @@ export const viewCurrenciesCommand = program
         symbol: currency.symbol
       }));
 
-      logList(loggable, 'currencies', opts);
+      $.logList(loggable, 'currencies', opts);
     } catch (error) {
-      logAndExitOnSqlEngineError('view', 'currencies', error.message);
+      $.logAndExitOnSqlEngineError('view', 'currencies', error.message);
     }
   });

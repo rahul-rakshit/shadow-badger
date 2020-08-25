@@ -1,12 +1,9 @@
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { Currency } from '../../../../entity/Currency/Currency-d';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
 import { failed } from '../../../../types-d';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export async function editCurrency(opts: {
   id: string;
@@ -21,7 +18,7 @@ export async function editCurrency(opts: {
 
   try {
     const foundCurrency = await currencyActions.findOne(id);
-    if (!foundCurrency) logAndExitNotFoundMessage('currency', idString);
+    if (!foundCurrency) $.logAndExitNotFoundMessage('currency', idString);
     const currency = foundCurrency as Currency;
 
     if (name !== undefined) currency.name = name;
@@ -36,12 +33,12 @@ export async function editCurrency(opts: {
 
     if (failed(validation)) {
       const messageMap = validation.value;
-      logAndExitOnValidationFailure<Currency>('edit', 'currency', messageMap);
+      $.logAndExitOnValidationFailure<Currency>('edit', 'currency', messageMap);
     } else {
       await currencyActions.edit(currency);
-      logSuccess('edited', 'currency', `with id ${id}`);
+      $.logSuccess('edited', 'currency', `with id ${id}`);
     }
   } catch (error) {
-    logAndExitOnSqlEngineError('edit', 'currency', error.message);
+    $.logAndExitOnSqlEngineError('edit', 'currency', error.message);
   }
 }

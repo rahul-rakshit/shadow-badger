@@ -1,8 +1,6 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const deleteCategoryCommand = program
   .command('category')
@@ -14,11 +12,11 @@ export const deleteCategoryCommand = program
     const id = Number(idString);
     try {
       const foundCategory = await categoryActions.findOne(id);
-      if (!foundCategory) logAndExitNotFoundMessage('category', idString);
+      if (!foundCategory) $.logAndExitNotFoundMessage('category', idString);
 
       await categoryActions.delete(id);
-      logSuccess('deleted', 'category', `with id ${id}`);
+      $.logSuccess('deleted', 'category', `with id ${id}`);
     } catch (error) {
-      logAndExitOnSqlEngineError('delete', 'category', error.message);
+      $.logAndExitOnSqlEngineError('delete', 'category', error.message);
     }
   });

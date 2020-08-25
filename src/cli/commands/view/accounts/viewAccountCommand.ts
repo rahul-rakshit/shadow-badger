@@ -1,11 +1,15 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { logObject } from '../../../cli-helpers/logObject';
-import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
 import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { Account } from '../../../../entity/Account/Account-d';
 import { accountActions } from '../../../../entity/Account/accountActions';
+import { processUtil } from '../../../cli-helpers/processUtil';
+
+const {
+  logAndExitNoFilterCriteria,
+  logAndExitNotFoundMessage,
+  logObject,
+  logAndExitOnSqlEngineError
+} = processUtil;
 
 export const viewAccountCommand = program
   .command('account')

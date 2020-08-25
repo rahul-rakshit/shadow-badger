@@ -1,16 +1,11 @@
-jest.mock('../../../cli-helpers/logAndExitNotFoundMessage');
 jest.mock('../../../../entity/Currency/currencyActions');
-jest.mock('../../../cli-helpers/logAndExitOnSqlEngineError');
-jest.mock('../../../cli-helpers/logAndExitOnValidationFailure');
-jest.mock('../../../cli-helpers/logSuccess');
+jest.mock('../../../cli-helpers/processUtil');
 
 import { editCurrency } from './editCurrency';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
+import { processUtil } from '../../../cli-helpers/processUtil';
 
 describe('editCurrency', () => {
   it("exits with a failure when the passed currency's id is invalid", async () => {
@@ -20,7 +15,10 @@ describe('editCurrency', () => {
     await editCurrency(currencyToEdit);
 
     expect(currencyActions.findOne).toHaveBeenCalledWith(1234);
-    expect(logAndExitNotFoundMessage).toHaveBeenCalledWith('currency', '1234');
+    expect(processUtil.logAndExitNotFoundMessage).toHaveBeenCalledWith(
+      'currency',
+      '1234'
+    );
   });
 
   it('exits with a failure if the update fails validation', async () => {
@@ -43,7 +41,7 @@ describe('editCurrency', () => {
 
     await editCurrency({ ...gbpUpdate, id: '1' });
 
-    expect(logAndExitOnValidationFailure).toHaveBeenCalledWith(
+    expect(processUtil.logAndExitOnValidationFailure).toHaveBeenCalledWith(
       'edit',
       'currency',
       messageMap
@@ -67,7 +65,11 @@ describe('editCurrency', () => {
     await editCurrency({ ...gbpUpdate, id: '1' });
 
     expect(currencyActions.edit).toHaveBeenCalledWith(gbpUpdate);
-    expect(logSuccess).toHaveBeenCalledWith('edited', 'currency', 'with id 1');
+    expect(processUtil.logSuccess).toHaveBeenCalledWith(
+      'edited',
+      'currency',
+      'with id 1'
+    );
   });
 
   it('can update optional fields to empty string', async () => {
@@ -91,6 +93,10 @@ describe('editCurrency', () => {
     expect(currencyActions.edit).toHaveBeenCalledWith(
       currencyWithResetDescription
     );
-    expect(logSuccess).toHaveBeenCalledWith('edited', 'currency', 'with id 2');
+    expect(processUtil.logSuccess).toHaveBeenCalledWith(
+      'edited',
+      'currency',
+      'with id 2'
+    );
   });
 });

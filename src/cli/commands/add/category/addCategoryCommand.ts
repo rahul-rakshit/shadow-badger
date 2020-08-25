@@ -1,12 +1,10 @@
 import { program } from 'commander';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { Category } from '../../../../entity/Category/Category-d';
 import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const addCategoryCommand = program
   .command('category')
@@ -25,13 +23,13 @@ export const addCategoryCommand = program
 
     if (failed(validation)) {
       const messageMap = validation.value;
-      logAndExitOnValidationFailure<Category>('add', 'category', messageMap);
+      $.logAndExitOnValidationFailure<Category>('add', 'category', messageMap);
     } else {
       try {
         const { id } = await categoryActions.create(newCategory);
-        logSuccess('added', 'category', `with id ${id}`);
+        $.logSuccess('added', 'category', `with id ${id}`);
       } catch (error) {
-        logAndExitOnSqlEngineError('add', 'category', error.message);
+        $.logAndExitOnSqlEngineError('add', 'category', error.message);
       }
     }
   });

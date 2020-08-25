@@ -1,13 +1,10 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
 import { Category } from '../../../../entity/Category/Category-d';
 import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const editCategoryCommand = program
   .command('category')
@@ -31,7 +28,7 @@ export const editCategoryCommand = program
 
       try {
         const foundCategory = await categoryActions.findOne(id);
-        if (!foundCategory) logAndExitNotFoundMessage('category', idString);
+        if (!foundCategory) $.logAndExitNotFoundMessage('category', idString);
         const category = foundCategory as Category;
 
         if (code) category.code = code;
@@ -45,7 +42,7 @@ export const editCategoryCommand = program
 
         if (failed(validation)) {
           const messageMap = validation.value;
-          logAndExitOnValidationFailure<Category>(
+          $.logAndExitOnValidationFailure<Category>(
             'edit',
             'category',
             messageMap
@@ -54,9 +51,9 @@ export const editCategoryCommand = program
 
         await categoryActions.edit(category);
 
-        logSuccess('edited', 'category', `with id ${id}`);
+        $.logSuccess('edited', 'category', `with id ${id}`);
       } catch (error) {
-        logAndExitOnSqlEngineError('edit', 'category', error.message);
+        $.logAndExitOnSqlEngineError('edit', 'category', error.message);
       }
     }
   );

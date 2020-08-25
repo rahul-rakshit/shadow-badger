@@ -1,11 +1,8 @@
 import { program } from 'commander';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { logObject } from '../../../cli-helpers/logObject';
-import { logAndExitNoFilterCriteria } from '../../../cli-helpers/logAndExitNoFilterCriteria';
 import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
 import { Currency } from '../../../../entity/Currency/Currency-d';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const viewCurrencyCommand = program
   .command('currency')
@@ -27,7 +24,8 @@ export const viewCurrencyCommand = program
       const idString = opts.id;
       const id = Number(idString);
 
-      if (!idString && !name && !code && !symbol) logAndExitNoFilterCriteria();
+      if (!idString && !name && !code && !symbol)
+        $.logAndExitNoFilterCriteria();
 
       try {
         const foundCurrency = id
@@ -36,11 +34,11 @@ export const viewCurrencyCommand = program
               where: parseDefinedOpts({ name, code, symbol })
             });
 
-        if (!foundCurrency) logAndExitNotFoundMessage('currency', opts.id);
+        if (!foundCurrency) $.logAndExitNotFoundMessage('currency', opts.id);
 
-        logObject(foundCurrency as Currency, 'currency');
+        $.logObject(foundCurrency as Currency, 'currency');
       } catch (error) {
-        logAndExitOnSqlEngineError('view', 'currency', error.message);
+        $.logAndExitOnSqlEngineError('view', 'currency', error.message);
       }
     }
   );

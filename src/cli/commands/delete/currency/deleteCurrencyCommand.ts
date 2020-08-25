@@ -1,10 +1,7 @@
 import { program } from 'commander';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
-import { logAndExitHasDependingEntry } from '../../../cli-helpers/logAndExitHasDependingEntry';
 import { accountActions } from '../../../../entity/Account/accountActions';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 export const deleteCurrencyCommand = program
   .command('currency')
@@ -16,19 +13,19 @@ export const deleteCurrencyCommand = program
     try {
       const id = Number(idString);
       const foundCurrency = await currencyActions.findOne(id);
-      if (!foundCurrency) logAndExitNotFoundMessage('currency', idString);
+      if (!foundCurrency) $.logAndExitNotFoundMessage('currency', idString);
 
       const dependingAccount = await accountActions.findOne(undefined, {
         where: { currency: foundCurrency }
       });
       if (dependingAccount) {
         const currencyId = foundCurrency?.id as number;
-        logAndExitHasDependingEntry('delete', 'currency', currencyId);
+        $.logAndExitHasDependingEntry('delete', 'currency', currencyId);
       }
 
       await currencyActions.delete(id);
-      logSuccess('deleted', 'currency', `with id ${id}`);
+      $.logSuccess('deleted', 'currency', `with id ${id}`);
     } catch (error) {
-      logAndExitOnSqlEngineError('delete', 'currency', error.message);
+      $.logAndExitOnSqlEngineError('delete', 'currency', error.message);
     }
   });

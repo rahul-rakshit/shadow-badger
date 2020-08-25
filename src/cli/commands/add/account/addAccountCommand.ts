@@ -1,14 +1,18 @@
 import { program } from 'commander';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { failed } from '../../../../types-d';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
-import { logAndExitOnSqlEngineError } from '../../../cli-helpers/logAndExitOnSqlEngineError';
-import { logAndExitNotFoundMessage } from '../../../cli-helpers/logAndExitNotFoundMessage';
 import { Account } from '../../../../entity/Account/Account-d';
 import { accountValidatorMap } from '../../../../entity/Account/accountValidatorMap';
 import { accountActions } from '../../../../entity/Account/accountActions';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { processUtil } from '../../../cli-helpers/processUtil';
+
+const {
+  logAndExitNotFoundMessage,
+  logAndExitOnValidationFailure,
+  logAndExitOnSqlEngineError,
+  logSuccess
+} = processUtil;
 
 export const addAccountCommand = program
   .command('account')

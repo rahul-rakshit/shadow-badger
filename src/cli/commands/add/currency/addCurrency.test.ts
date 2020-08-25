@@ -1,13 +1,11 @@
-jest.mock('../../../cli-helpers/logAndExitOnValidationFailure');
 jest.mock('../../../../entity/Currency/currencyActions');
-jest.mock('../../../cli-helpers/logSuccess');
+jest.mock('../../../cli-helpers/processUtil');
 
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
-import { logAndExitOnValidationFailure } from '../../../cli-helpers/logAndExitOnValidationFailure';
 import { addCurrency } from './addCurrency';
-import { logSuccess } from '../../../cli-helpers/logSuccess';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 describe('addCurrency', () => {
   it('exits with failure when validation fails', async () => {
@@ -24,7 +22,7 @@ describe('addCurrency', () => {
 
     await addCurrency(currencyToAdd);
 
-    expect(logAndExitOnValidationFailure).toHaveBeenCalledWith(
+    expect($.logAndExitOnValidationFailure).toHaveBeenCalledWith(
       'add',
       'currency',
       messageMap
@@ -42,6 +40,10 @@ describe('addCurrency', () => {
     await addCurrency(gbp);
 
     expect(currencyActions.create).toHaveBeenCalledWith(gbp);
-    expect(logSuccess).toHaveBeenCalledWith('added', 'currency', 'with id 🍌');
+    expect($.logSuccess).toHaveBeenCalledWith(
+      'added',
+      'currency',
+      'with id 🍌'
+    );
   });
 });
