@@ -26,7 +26,7 @@ describe('viewCurrencies', () => {
   });
 
   it('only calls logList with id, name, code and symbol', async () => {
-    const currenciesWithExtraFiels = currenciesList.map((currency) => ({
+    const currenciesWithExtraFields = currenciesList.map((currency) => ({
       ...currency,
       a: '1',
       b: '2',
@@ -34,7 +34,7 @@ describe('viewCurrencies', () => {
     }));
     currencyActions.findAll = jest
       .fn()
-      .mockResolvedValue(currenciesWithExtraFiels);
+      .mockResolvedValue(currenciesWithExtraFields);
 
     await viewCurrencies({ symbol: '$' });
 

@@ -15,7 +15,7 @@ export const currencySchema = new EntitySchema<Currency>({
   uniques: [
     {
       name: 'UNIQUE_TEST',
-      columns: ['code']
+      columns: ['name', 'code']
     }
   ]
 });

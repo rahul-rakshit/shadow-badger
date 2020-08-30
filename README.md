@@ -14,7 +14,7 @@ class Currency << (1, yellow) >> {
   {field} +version: number;
   ..
   {field} +code: string; (unique)
-  {field} +name: string;
+  {field} +name: string; (unique)
   {field} +symbol: string;
   {field} +description?: string;
 }
@@ -26,7 +26,7 @@ class Category << (1, yellow) >> {
   {field} -version: number;
   ..
   {field} #code: string; (unique)
-  {field} #name: string;
+  {field} #name: string; (unique)
   {field} #description?: string;
 }
 
