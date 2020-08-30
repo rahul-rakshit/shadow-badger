@@ -56,4 +56,19 @@ describe('viewCurrencies', () => {
       symbol: '$'
     });
   });
+
+  it('exits with message if the is an sql engine error', async () => {
+    currencyActions.findAll = jest.fn().mockImplementation(async () => {
+      throw new Error('AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa');
+    });
+
+    await viewCurrencies({});
+
+    expect(currencyActions.findAll).toHaveBeenCalledWith({ where: {} });
+    expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+      'view',
+      'currencies',
+      'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'
+    );
+  });
 });

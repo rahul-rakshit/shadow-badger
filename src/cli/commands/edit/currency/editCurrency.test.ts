@@ -99,4 +99,18 @@ describe('editCurrency', () => {
       'with id 2'
     );
   });
+
+  it('exits with message when there is an sql engine error', async () => {
+    currencyActions.findOne = jest.fn().mockImplementation(async () => {
+      throw new Error('AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa');
+    });
+
+    await editCurrency({ id: '1234', code: 'WAT' });
+
+    expect(processUtil.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+      'edit',
+      'currency',
+      'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'
+    );
+  });
 });

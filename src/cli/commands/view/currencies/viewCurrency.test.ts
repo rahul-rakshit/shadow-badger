@@ -70,5 +70,20 @@ describe('viewCurrency', () => {
       });
       expect($.logObject).toHaveBeenCalledWith(dummyCurrency, 'currency');
     });
+
+    it('exits with a message if the is an sql engine error', async () => {
+      currencyActions.findOne = jest.fn().mockImplementation(async () => {
+        throw new Error('AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa');
+      });
+
+      await viewCurrency({ id: '1234' });
+
+      expect(currencyActions.findOne).toHaveBeenCalledWith(1234);
+      expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+        'view',
+        'currency',
+        'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'
+      );
+    });
   });
 });

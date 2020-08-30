@@ -46,4 +46,23 @@ describe('addCurrency', () => {
       'with id 🍌'
     );
   });
+
+  it('exits with message if the is an sql engine error', async () => {
+    currencyActions.create = jest.fn().mockImplementation(async () => {
+      throw new Error('AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa');
+    });
+    const gbp = {
+      name: 'Great Britain Pound',
+      code: 'GBP',
+      symbol: '£'
+    };
+
+    await addCurrency(gbp);
+
+    expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+      'add',
+      'currency',
+      'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'
+    );
+  });
 });

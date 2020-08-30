@@ -41,4 +41,18 @@ describe('deleteCurrency', () => {
 
     expect($.logSuccess('deleted', 'currency'));
   });
+
+  it('exits with message when there is an sql engine error', async () => {
+    currencyActions.findOne = jest.fn().mockImplementation(async () => {
+      throw new Error('AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa');
+    });
+
+    await deleteCurrency({ id: '1234' });
+
+    expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+      'delete',
+      'currency',
+      'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'
+    );
+  });
 });
