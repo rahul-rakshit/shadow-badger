@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { viewCurrency } from './viewCurrency';
+import { viewCurrencies } from './viewCurrencies';
 
 export const viewCurrenciesCommand = program
   .command('currencies')
@@ -9,4 +9,4 @@ export const viewCurrenciesCommand = program
   .option('-c, --code, <code>', 'The currency code, eg. USD')
   .option('-n, --name <name>', 'The currency name, eg. US_Dollar')
   .option('-$, --symbol <symbol>', 'The currency symbol, eg. $')
-  .action(viewCurrency);
+  .action(viewCurrencies);
