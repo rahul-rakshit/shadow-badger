@@ -34,7 +34,8 @@ describe('addCurrency', () => {
     const gbp = {
       name: 'Great Britain Pound',
       code: 'GBP',
-      symbol: '£'
+      symbol: '£',
+      description: 'Currency of the United Kingdom'
     };
 
     await addCurrency(gbp);

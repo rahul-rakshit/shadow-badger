@@ -16,7 +16,7 @@ class Currency << (1, yellow) >> {
   {field} +code: string; (unique)
   {field} +name: string;
   {field} +symbol: string;
-  {field} #description?: string;
+  {field} +description?: string;
 }
 
 class Category << (1, yellow) >> {
