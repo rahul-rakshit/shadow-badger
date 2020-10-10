@@ -8,6 +8,8 @@ import { currencyActions } from '../../../../entity/Currency/currencyActions';
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 describe('addCurrency', () => {
+  beforeEach(jest.resetAllMocks);
+
   it('exits with failure when validation fails', async () => {
     const currencyToAdd = {
       name: 'Fake currency with incorrect code',
@@ -45,6 +47,21 @@ describe('addCurrency', () => {
       'added',
       'currency',
       'with id 🍌'
+    );
+  });
+
+  it('auto-adds optional fields (eg. description) as empty strings', async () => {
+    const usd = {
+      name: 'United States Dollar',
+      code: 'USD',
+      symbol: '$'
+    };
+    const usdWithEmptyDescription = { ...usd, description: '' };
+
+    await addCurrency(usd);
+
+    expect(currencyActions.create).toHaveBeenCalledWith(
+      usdWithEmptyDescription
     );
   });
 

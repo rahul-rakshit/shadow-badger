@@ -11,7 +11,7 @@ import { currencySchema } from './src/entity/Currency/currencySchema';
 async function run() {
   await createConnection({
     type: 'sqlite',
-    database: '~/PersonalCode/side_projects/shadow-badger-cli/test.sqlite3',
+    database: 'test.sqlite3',
     entities: [currencySchema, accountSchema, categorySchema],
     synchronize: true
   });

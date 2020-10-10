@@ -12,6 +12,7 @@ export async function addCurrency(opts: {
   description?: string;
 }) {
   const newCurrency: Currency = opts;
+  if (opts.description === undefined) newCurrency.description = '';
   const validation = validateModelObject<Currency>(
     newCurrency,
     currencyValidatorMap

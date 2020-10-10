@@ -8,6 +8,8 @@ import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
 
 describe('addCategory', () => {
+  beforeEach(jest.resetAllMocks);
+
   it('exits with failure when validation fails', async () => {
     const categoryToAdd = {
       name: 'Fake category with incorrect code',
@@ -43,6 +45,20 @@ describe('addCategory', () => {
       'added',
       'category',
       'with id 🍅'
+    );
+  });
+
+  it('auto-adds optional fields (eg. description) as empty strings', async () => {
+    const rent = {
+      name: 'Rent',
+      code: 'RNT'
+    };
+    const rentWithEmptyDescription = { ...rent, description: '' };
+
+    await addCategory(rent);
+
+    expect(categoryActions.create).toHaveBeenCalledWith(
+      rentWithEmptyDescription
     );
   });
 

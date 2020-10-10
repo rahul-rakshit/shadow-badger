@@ -8,5 +8,5 @@ export const addCategoryCommand = program
   .description('save a new category to the database')
   .requiredOption('-c, --code, <code>', 'The category code, eg. GRC')
   .requiredOption('-n, --name <name>', 'The category name, eg. Groceries')
-  .requiredOption('-d, --description <description>', 'The category description')
+  .option('-d, --description <description>', 'The category description')
   .action(addCategory);

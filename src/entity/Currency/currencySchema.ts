@@ -9,7 +9,7 @@ export const currencySchema = new EntitySchema<Currency>({
     name: { type: String },
     code: { type: String },
     symbol: { type: String },
-    description: { type: String, nullable: true },
+    description: { type: String },
     ...schemaCoreColumns
   },
   uniques: [

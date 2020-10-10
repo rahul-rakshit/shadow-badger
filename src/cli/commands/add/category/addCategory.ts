@@ -1,4 +1,5 @@
 import { Category } from '../../../../entity/Category/Category-d';
+
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
 import { failed } from '../../../../types-d';
@@ -11,6 +12,7 @@ export async function addCategory(opts: {
   description?: string;
 }) {
   const newCategory: Category = opts;
+  if (opts.description === undefined) newCategory.description = '';
   const validation = validateModelObject<Category>(
     newCategory,
     categoryValidatorMap

@@ -20,14 +20,14 @@ class Currency << (1, yellow) >> {
 }
 
 class Category << (1, yellow) >> {
-  {field} #id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
+  {field} +id: number;
+  {field} +created_at: Date;
+  {field} +updated_at: Date;
+  {field} +version: number;
   ..
-  {field} #code: string; (unique)
-  {field} #name: string; (unique)
-  {field} #description?: string;
+  {field} +code: string; (unique)
+  {field} +name: string; (unique)
+  {field} +description?: string;
 }
 
 class Account << (1, yellow) >> {

@@ -7,6 +7,5 @@ import { ModelValidatorMap } from '../../validations/validations-d';
 
 export const categoryValidatorMap: ModelValidatorMap<Category> = {
   name: required(),
-  code: combine(required(), exactLength(3), allCaps()),
-  description: required()
+  code: combine(required(), exactLength(3), allCaps())
 };
