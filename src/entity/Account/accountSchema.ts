@@ -1,16 +1,15 @@
 import { EntitySchema } from 'typeorm';
 import { Account } from './Account-d';
+import { idColumn, schemaCoreColumns } from '../schemaColumns';
 
 export const accountSchema = new EntitySchema<Account>({
   name: 'account',
   columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: true
-    },
+    ...idColumn,
     name: { type: String },
-    code: { type: String }
+    code: { type: String },
+    description: { type: String },
+    ...schemaCoreColumns
   },
   uniques: [
     {

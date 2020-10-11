@@ -31,18 +31,18 @@ class Category << (1, yellow) >> {
 }
 
 class Account << (1, yellow) >> {
-  {field} #id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
+  {field} +id: number;
+  {field} +created_at: Date;
+  {field} +updated_at: Date;
+  {field} +version: number;
   ..
-  {field} #code: string; (unique)
-  {field} #name: string;
+  {field} +code: string; (unique)
+  {field} +name: string;
   {field} -opened?: Date;
   {field} -closed?: Date;
-  {field} -description?: string;
+  {field} +description?: string;
   ..
-  {field} -currencyId: number;
+  {field} +currencyId: number;
 }
 
 class Vendor << (1, yellow) >> {

@@ -1,8 +1,17 @@
 import { Currency } from '../Currency/Currency-d';
+import { DbCoreFields } from '../DbCoreFields-d';
 
-export interface Account {
-  id?: number;
+interface AccountFields {
   name?: string;
   code?: string;
-  currency?: Currency;
+  description?: string;
 }
+
+interface AccountRelationFields {
+  currency?: Currency;
+  currencyId?: number;
+}
+
+export type Account = { id?: number } & AccountFields &
+  AccountRelationFields &
+  DbCoreFields;

@@ -13,7 +13,7 @@ async function run() {
     type: 'sqlite',
     database: 'test.sqlite3',
     entities: [currencySchema, accountSchema, categorySchema],
-    synchronize: true
+    synchronize: false
   });
 
   program.storeOptionsAsProperties(false).passCommandToAction(false);
