@@ -1,7 +1,7 @@
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { categoryActions } from '../../../../entity/Category/categoryActions';
 import { Category } from '../../../../entity/Category/Category-d';
-import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
+import { parseDefinedOpts } from '../../../../utils/parseDefinedOpts';
 
 export async function viewCategory(opts: {
   id?: string;

@@ -1,7 +1,7 @@
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { accountActions } from '../../../../entity/Account/accountActions';
-import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { Account } from '../../../../entity/Account/Account-d';
+import { parseDefinedOpts } from '../../../../utils/parseDefinedOpts';
 
 export async function viewAccount(opts: {
   id?: string;

@@ -9,6 +9,8 @@ export const accountSchema = new EntitySchema<Account>({
     name: { type: String },
     code: { type: String },
     description: { type: String },
+    opened: { type: Date, nullable: true },
+    closed: { type: Date, nullable: true },
     ...schemaCoreColumns
   },
   uniques: [

@@ -28,7 +28,9 @@ describe('addAccount', () => {
 
     expect(accountActions.create).toHaveBeenCalledWith({
       ...dummyAccount,
-      currency: dummyCurrency
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
     });
     expect(currencyActions.findOne).toHaveBeenCalledWith(1);
     expect($.logSuccess).toHaveBeenCalledWith('added', 'account', 'with id 4');
@@ -70,28 +72,6 @@ describe('addAccount', () => {
     );
   });
 
-  it('auto-adds optional fields (eg. description) as empty strings', async () => {
-    const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
-    currencyActions.findOne = jest.fn().mockResolvedValue(dummyCurrency);
-    const dummyAccount = { name: 'dumaccount', code: 'DACC' };
-    const dummyAccountWithEmptyDescription = {
-      ...dummyAccount,
-      description: ''
-    };
-    accountActions.create = jest
-      .fn()
-      .mockResolvedValue({ id: 4, ...dummyAccount });
-
-    await addAccount({ ...dummyAccount, currencyId: '1' });
-
-    expect(accountActions.create).toHaveBeenCalledWith({
-      ...dummyAccountWithEmptyDescription,
-      currency: dummyCurrency
-    });
-    expect(currencyActions.findOne).toHaveBeenCalledWith(1);
-    expect($.logSuccess).toHaveBeenCalledWith('added', 'account', 'with id 4');
-  });
-
   it('exits with message if there is an sql engine error', async () => {
     const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
     currencyActions.findOne = jest.fn().mockResolvedValue(dummyCurrency);
@@ -107,7 +87,9 @@ describe('addAccount', () => {
 
     expect(accountActions.create).toHaveBeenCalledWith({
       ...dummyAccount,
-      currency: dummyCurrency
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
     });
     expect(currencyActions.findOne).toHaveBeenCalledWith(1);
     expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(

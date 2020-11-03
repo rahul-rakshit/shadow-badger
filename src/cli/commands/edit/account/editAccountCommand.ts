@@ -10,4 +10,6 @@ export const editAccountCommand = program
   .option('-n, --name <name>', 'The account name, eg. Monzo')
   .option('-d, --description', 'Description field for notes')
   .option('-cId, --currency-id <currencyId>', "The related currency's id")
+  .option('-o, --opened <opened>', 'Date account was opened, YYYY/MM/DD')
+  .option('-x, --closed <closed>', 'Date account was closed, YYYY/MM/DD')
   .action(editAccount);

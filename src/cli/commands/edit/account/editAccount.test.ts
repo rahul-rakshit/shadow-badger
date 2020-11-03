@@ -19,7 +19,9 @@ describe('editAccount', () => {
       name: 'dumaccount',
       code: 'DACC',
       description: 'My dummy account',
-      currency: dummyCurrency
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
     };
     accountActions.findOne = jest.fn().mockResolvedValue(dummyAccount);
 
@@ -74,7 +76,9 @@ describe('editAccount', () => {
       name: 'dumaccount',
       code: 'DACC',
       description: 'A description that will be deleted later',
-      currency: dummyCurrency
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
     };
     const accountWithResetDescription = { ...dummyAccount, description: '' };
     accountActions.findOne = jest.fn().mockResolvedValue(dummyAccount);
@@ -87,6 +91,58 @@ describe('editAccount', () => {
     expect($.logSuccess).toHaveBeenCalledWith('edited', 'account', 'with id 4');
   });
 
+  it('can update optional fields (eg. opened) with a date', async () => {
+    const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
+    const dummyAccount: Account = {
+      id: 4,
+      name: 'dumaccount',
+      code: 'DACC',
+      description: '',
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
+    };
+    const accountWithOpenedDate = {
+      ...dummyAccount,
+      opened: new Date(Date.parse('2020/12/13'))
+    };
+    accountActions.findOne = jest.fn().mockResolvedValue(dummyAccount);
+
+    await editAccount({ ...accountWithOpenedDate, id: '4' } as any);
+
+    expect(accountActions.edit).toHaveBeenCalledWith(accountWithOpenedDate);
+    expect($.logSuccess).toHaveBeenCalledWith('edited', 'account', 'with id 4');
+  });
+
+  it('can set a date field to null by specifying an empty string', async () => {
+    const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
+    const dummyAccount: Account = {
+      id: 4,
+      name: 'dumaccount',
+      code: 'DACC',
+      description: '',
+      currency: dummyCurrency,
+      opened: new Date(Date.parse('2020/12/13')),
+      closed: null
+    };
+    const accountWithResetDate = {
+      ...dummyAccount,
+      opened: ''
+    };
+    accountActions.findOne = jest.fn().mockResolvedValue(dummyAccount);
+
+    await editAccount({
+      ...accountWithResetDate,
+      id: '4'
+    } as any);
+
+    expect(accountActions.edit).toHaveBeenCalledWith({
+      ...accountWithResetDate,
+      opened: null
+    });
+    expect($.logSuccess).toHaveBeenCalledWith('edited', 'account', 'with id 4');
+  });
+
   it("can't update currency if passed currencyId is invalid", async () => {
     const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
     const dummyAccount = {
@@ -94,7 +150,9 @@ describe('editAccount', () => {
       name: 'dumaccount',
       code: 'DACC',
       description: 'My dummy account',
-      currency: dummyCurrency
+      currency: dummyCurrency,
+      opened: null,
+      closed: null
     };
     accountActions.findOne = jest.fn().mockResolvedValue(dummyAccount);
     currencyActions.findOne = jest.fn().mockResolvedValue(null);

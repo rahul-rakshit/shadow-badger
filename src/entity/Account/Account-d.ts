@@ -5,6 +5,8 @@ interface AccountFields {
   name?: string;
   code?: string;
   description?: string;
+  opened?: Date | null;
+  closed?: Date | null;
 }
 
 interface AccountRelationFields {

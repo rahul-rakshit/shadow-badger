@@ -1,7 +1,7 @@
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { Currency } from '../../../../entity/Currency/Currency-d';
+import { parseDefinedOpts } from '../../../../utils/parseDefinedOpts';
 
 export async function viewCurrency(opts: {
   id?: string;

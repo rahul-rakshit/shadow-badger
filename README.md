@@ -38,8 +38,8 @@ class Account << (1, yellow) >> {
   ..
   {field} +code: string; (unique)
   {field} +name: string;
-  {field} -opened?: Date;
-  {field} -closed?: Date;
+  {field} +opened?: Date;
+  {field} +closed?: Date;
   {field} +description?: string;
   ..
   {field} +currencyId: number;

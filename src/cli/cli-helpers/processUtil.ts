@@ -4,7 +4,7 @@ import { ModelValidationMessageMap } from '../../validations/validations-d';
 import { table, getBorderCharacters } from 'table';
 import { isEmptyCondition } from './isEmptyCondition';
 import { transformListForLogging } from './transformListForLogging';
-import { findLongestKeyLength } from './findLongestKeyLength';
+import { findLongestKeyLength } from '../../utils/findLongestKeyLength';
 
 export const processUtil = {
   logAndExitHasDependingEntry(

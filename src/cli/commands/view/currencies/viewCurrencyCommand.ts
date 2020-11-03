@@ -1,8 +1,8 @@
 import { program } from 'commander';
-import { parseDefinedOpts } from '../../../cli-helpers/parseDefinedOpts';
 import { currencyActions } from '../../../../entity/Currency/currencyActions';
 import { Currency } from '../../../../entity/Currency/Currency-d';
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { parseDefinedOpts } from '../../../../utils/parseDefinedOpts';
 
 export const viewCurrencyCommand = program
   .command('currency')

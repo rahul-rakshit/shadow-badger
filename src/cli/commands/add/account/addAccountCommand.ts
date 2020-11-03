@@ -13,4 +13,6 @@ export const addAccountCommand = program
     "The related currency's id"
   )
   .option('-d, --description <description>', 'Description field for notes')
+  .option('-o, --opened <opened>', 'Date account was opened, YYYY/MM/DD')
+  .option('-x, --closed <closed>', 'Date account was closed, YYYY/MM/DD')
   .action(addAccount);

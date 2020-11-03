@@ -5,6 +5,8 @@ import { currencyActions } from '../../../../entity/Currency/currencyActions';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { accountValidatorMap } from '../../../../entity/Account/accountValidatorMap';
 import { failed } from '../../../../types-d';
+import { getDate } from '../../../../utils/getDate';
+import { isNullish } from '../../../../utils/isNullish';
 
 export async function editAccount(opts: {
   id: string;
@@ -12,12 +14,14 @@ export async function editAccount(opts: {
   name?: string;
   description?: string;
   currencyId?: string;
+  opened?: string;
+  closed?: string;
 }) {
   const idString = opts.id;
   const id = Number(idString);
   const currencyIdString = opts.currencyId;
   const currencyId = Number(currencyIdString);
-  const { code, name, description } = opts;
+  const { code, name, description, closed, opened } = opts;
 
   try {
     const foundAccount = await accountActions.findOne(id, {
@@ -28,6 +32,14 @@ export async function editAccount(opts: {
 
     if (code !== undefined) account.code = code;
     if (name !== undefined) account.name = name;
+    if (!isNullish(opened)) {
+      if (opened === '') account.opened = null;
+      else account.opened = getDate(opened as string);
+    }
+    if (!isNullish(closed)) {
+      if (closed === '') account.closed = null;
+      else account.closed = getDate(closed as string);
+    }
     if (currencyId) {
       const foundCurrency = await currencyActions.findOne(currencyId);
       if (!foundCurrency)
