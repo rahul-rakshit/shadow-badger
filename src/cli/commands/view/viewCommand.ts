@@ -5,6 +5,8 @@ import { viewAccountsCommand } from './accounts/viewAccountsCommand';
 import { viewAccountCommand } from './accounts/viewAccountCommand';
 import { viewCategoriesCommand } from './categories/viewCategoriesCommand';
 import { viewCategoryCommand } from './categories/viewCategoryCommand';
+import { viewVendorCommand } from './vendors/viewVendorCommand';
+import { viewVendorsCommand } from './vendors/viewVendorsCommand';
 
 export const viewCommand = program
   .command('view <model>')
@@ -14,4 +16,6 @@ export const viewCommand = program
   .addCommand(viewAccountCommand)
   .addCommand(viewAccountsCommand)
   .addCommand(viewCategoryCommand)
-  .addCommand(viewCategoriesCommand);
+  .addCommand(viewCategoriesCommand)
+  .addCommand(viewVendorCommand)
+  .addCommand(viewVendorsCommand);

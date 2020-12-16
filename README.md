@@ -46,15 +46,15 @@ class Account << (1, yellow) >> {
 }
 
 class Vendor << (1, yellow) >> {
-  {field} -id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
+  {field} +id: number;
+  {field} +created_at: Date;
+  {field} +updated_at: Date;
+  {field} +version: number;
   ..
-  {field} -name: string;
-  {field} -address?: string;
-  {field} -coordinates?: string;
-  {field} -description?: string;
+  {field} +name: string;
+  {field} +address?: string;
+  {field} +coordinates?: string;
+  {field} +description?: string;
 }
 
 class Transaction << (1, yellow) >> {
