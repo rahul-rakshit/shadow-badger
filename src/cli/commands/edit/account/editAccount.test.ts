@@ -143,7 +143,7 @@ describe('editAccount', () => {
     expect($.logSuccess).toHaveBeenCalledWith('edited', 'account', 'with id 4');
   });
 
-  it("can't update currency if passed currencyId is invalid", async () => {
+  it("can't update account if passed currencyId is invalid", async () => {
     const dummyCurrency = { id: 1, name: 'dummy', code: 'DUM', symbol: 'Đ' };
     const dummyAccount = {
       id: 4,

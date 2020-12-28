@@ -5,7 +5,7 @@ import {
   UpdateResult
 } from 'typeorm';
 
-type AllowedRelations = 'currency' | 'account';
+export type AllowedRelations = 'currency' | 'account' | 'category' | 'vendor';
 
 export interface Actions<T> {
   create: (modelObject: T) => Promise<T>;

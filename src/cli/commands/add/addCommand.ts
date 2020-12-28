@@ -3,6 +3,7 @@ import { addCurrencyCommand } from './currency/addCurrencyCommand';
 import { addAccountCommand } from './account/addAccountCommand';
 import { addCategoryCommand } from './category/addCategoryCommand';
 import { addVendorCommand } from './vendor/addVendorCommand';
+import { addTransactionCommmand } from './transaction/addTransactionCommand';
 
 export const addCommand = program
   .command('add')
@@ -10,4 +11,5 @@ export const addCommand = program
   .addCommand(addCurrencyCommand)
   .addCommand(addCategoryCommand)
   .addCommand(addAccountCommand)
-  .addCommand(addVendorCommand);
+  .addCommand(addVendorCommand)
+  .addCommand(addTransactionCommmand);

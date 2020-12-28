@@ -3,6 +3,7 @@ import { editCurrencyCommand } from './currency/editCurrencyCommand';
 import { editAccountCommand } from './account/editAccountCommand';
 import { editCategoryCommand } from './category/editCategoryCommand';
 import { editVendorCommand } from './vendor/editVendorCommand';
+import { editTransactionCommand } from './transaction/editTransactionCommand';
 
 export const editCommand = program
   .command('edit')
@@ -10,4 +11,5 @@ export const editCommand = program
   .addCommand(editCurrencyCommand)
   .addCommand(editAccountCommand)
   .addCommand(editCategoryCommand)
-  .addCommand(editVendorCommand);
+  .addCommand(editVendorCommand)
+  .addCommand(editTransactionCommand);
