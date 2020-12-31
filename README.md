@@ -50,6 +50,7 @@ class Vendor << (1, yellow) >> {
   {field} +created_at: Date;
   {field} +updated_at: Date;
   {field} +version: number;
+  {field} -tags?: string[];
   ..
   {field} +name: string;
   {field} +address?: string;
@@ -58,18 +59,19 @@ class Vendor << (1, yellow) >> {
 }
 
 class Transaction << (1, yellow) >> {
-  {field} -id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
+  {field} +id: number;
+  {field} +created_at: Date;
+  {field} +updated_at: Date;
+  {field} +version: number;
   ..
-  {field} -dateTime: Date;
-  {field} -amount: number;
-  {field} -description?: string;
+  {field} +dateTime: Date;
+  {field} -amount: string;
+  {field} +description?: string;
+  {field} -tags?: string[];
   ..
-  {field} -accountId: number;
-  {field} -categoryId: number;
-  {field} -vendorId: number;
+  {field} +accountId: number;
+  {field} +categoryId: number;
+  {field} +vendorId: number;
 }
 
 class Snapshot << (2, orange )>> {
@@ -79,33 +81,9 @@ class Snapshot << (2, orange )>> {
   {field} -version: number;
   ..
   {field} -dateTime: Date;
-  {field} -balance: number;
+  {field} -balance: string;
   ..
   {field} -accountId: number;
-}
-
-class VendorGroup << (3, fuchsia) >> {
-  {field} -id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
-  ..
-  {field} -name: string;
-  {field} -description?: string;
-  ..
-  {field} -vendorIds: number[];
-}
-
-class TransactionGroup << (3, fuchsia) >> {
-  {field} -id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
-  ..
-  {field} -name: string;
-  {field} -description?: string;
-  ..
-  {field} -transactionIds: number[];
 }
 
 Currency --|> Account: 1:n
@@ -113,8 +91,6 @@ Account --|> Transaction: 1:n
 Category --|> Transaction: 1:n
 Vendor --|> Transaction: 1:n
 Account --|> Snapshot: 1:n
-Vendor --|> VendorGroup: n:n
-Transaction --|> TransactionGroup: n:n
 ```
 
 **Legend**:
@@ -124,4 +100,10 @@ Transaction --|> TransactionGroup: n:n
 - red squares: yet to be implemented fields
 - "1" in a yellow circle: stage 1 plans
 - "2" in an orange circle: stage 2 plans
-- "3" in a fuchsia circle: stage 3 plans
+
+## Next Steps
+
+- I mistakenly implemented the amount in transactions as a number. It should be stored in the database as a string, to make sure there are no binary rounding errors. Of course, there should be a validNumber-validation.
+- make accounts and transactions viewable by relation id
+- snapshots (again, amounts as strings of valid numbers)
+- remove vendor groups and transaction groups; to be implemented as simple arrays
