@@ -13,7 +13,7 @@ export const transactionSchema = new EntitySchema<Transaction>({
   columns: {
     ...idColumn,
     dateTime: { type: Date },
-    amount: { type: Number },
+    amount: { type: String },
     description: { type: String },
     ...schemaCoreColumns
   },

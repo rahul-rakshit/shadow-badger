@@ -27,7 +27,7 @@ describe('editTransaction', () => {
     const transaction = {
       id: 10,
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       accountId: 1,
       categoryId: 2,
@@ -39,7 +39,7 @@ describe('editTransaction', () => {
 
     expect(transactionActions.edit).toHaveBeenCalledWith({
       ...transaction,
-      amount: 103
+      amount: '103'
     });
     expect(transactionActions.findOne).toHaveBeenCalledWith(
       10,
@@ -77,7 +77,7 @@ describe('editTransaction', () => {
     const transaction = {
       id: 10,
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       accountId: 1,
       categoryId: 2,
@@ -111,7 +111,7 @@ describe('editTransaction', () => {
     const transaction = {
       id: 10,
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       accountId: 1,
       categoryId: 2,
@@ -144,7 +144,7 @@ describe('editTransaction', () => {
     const transaction = {
       id: 10,
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       accountId: 1,
       categoryId: 2,

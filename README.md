@@ -103,7 +103,6 @@ Account --|> Snapshot: 1:n
 
 ## Next Steps
 
-- I mistakenly implemented the amount in transactions as a number. It should be stored in the database as a string, to make sure there are no binary rounding errors. Of course, there should be a validNumber-validation.
 - make accounts and transactions viewable by relation id
 - snapshots (again, amounts as strings of valid numbers)
 - remove vendor groups and transaction groups; to be implemented as simple arrays

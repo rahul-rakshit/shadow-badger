@@ -5,7 +5,7 @@ import { Account } from '../Account/Account-d';
 
 interface TransactionFields {
   dateTime?: Date;
-  amount?: number;
+  amount?: string;
   description?: string;
 }
 

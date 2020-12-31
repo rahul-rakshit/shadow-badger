@@ -17,7 +17,7 @@ export async function addTransaction(opts: {
   categoryId: string;
   vendorId: string;
 }) {
-  const amount = Number(opts.amount);
+  const amount = opts.amount;
   const dateTime = getDate(opts.dateTime);
   const description = opts.description ?? '';
   const accountId = Number(opts.accountId);

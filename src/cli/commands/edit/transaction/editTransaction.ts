@@ -28,7 +28,7 @@ export async function editTransaction(opts: {
     const tnx = foundTransaction as Transaction;
 
     if (opts.dateTime) tnx.dateTime = getDate(opts.dateTime);
-    if (opts.amount) tnx.amount = Number(opts.amount);
+    if (opts.amount) tnx.amount = opts.amount;
     if (!isNullish(opts.description)) tnx.description = opts.description;
 
     if (opts.accountId) {

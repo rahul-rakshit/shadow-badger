@@ -2,7 +2,7 @@ import { validNumber } from './validNumber';
 
 describe('validNumber returns a function that', () => {
   it('passes validation if a valid number is passed', () => {
-    const number = 42;
+    const number = '42';
 
     const validate = validNumber();
     const validation = validate(number);
@@ -17,21 +17,11 @@ describe('validNumber returns a function that', () => {
     expect(validation).toHaveSucceeded();
   });
 
-  it("otherwise fails validation if value isn't a number", () => {
+  it("otherwise fails validation if value isn't a valid number", () => {
     const string = 'hello';
 
     const validate = validNumber();
     const validation = validate(string);
-
-    expect(validation).toHaveFailed();
-    expect(validation.value).toEqual('Value must be a number.');
-  });
-
-  it('otherwise fails validation if value is NaN', () => {
-    const badNumber = Number('hello');
-
-    const validate = validNumber();
-    const validation = validate(badNumber);
 
     expect(validation).toHaveFailed();
     expect(validation.value).toEqual('Value must be a valid number.');

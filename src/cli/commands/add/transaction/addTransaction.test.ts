@@ -41,7 +41,7 @@ describe('addTransaction', () => {
 
     expect(transactionActions.create).toHaveBeenCalledWith({
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       account: dummyAccount,
       category: dummyCategory,
@@ -88,7 +88,7 @@ describe('addTransaction', () => {
     };
     const dummyTransaction = {
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: Number('invalid number'),
+      amount: 'invalid number',
       description: 'Just another time I spent money'
     };
     transactionActions.create = jest.fn().mockResolvedValue({
@@ -139,7 +139,7 @@ describe('addTransaction', () => {
 
     expect(transactionActions.create).toHaveBeenCalledWith({
       dateTime: new Date(Date.parse('2020/08/17')),
-      amount: 99.99,
+      amount: '99.99',
       description: 'Just another time I spent money',
       account: dummyAccount,
       category: dummyCategory,
