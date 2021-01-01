@@ -11,6 +11,7 @@ export const accountSchema = new EntitySchema<Account>({
     description: { type: String },
     opened: { type: Date, nullable: true },
     closed: { type: Date, nullable: true },
+    currencyId: { type: Number },
     ...schemaCoreColumns
   },
   uniques: [

@@ -17,8 +17,7 @@ describe('addAccount', () => {
     currencyActions.findOne = jest.fn().mockResolvedValue(dummyCurrency);
     const dummyAccount = {
       name: 'dumaccount',
-      code: 'DACC',
-      description: 'My dummy account'
+      code: 'DACC'
     };
     accountActions.create = jest
       .fn()
@@ -30,7 +29,8 @@ describe('addAccount', () => {
       ...dummyAccount,
       currency: dummyCurrency,
       opened: null,
-      closed: null
+      closed: null,
+      description: ''
     });
     expect(currencyActions.findOne).toHaveBeenCalledWith(1);
     expect($.logSuccess).toHaveBeenCalledWith('added', 'account', 'with id 4');

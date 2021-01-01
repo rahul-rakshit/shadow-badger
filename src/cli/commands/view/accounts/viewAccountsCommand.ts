@@ -9,4 +9,5 @@ export const viewAccountsCommand = program
   .option('-c, --code, <code>', 'The account code, eg. MNZO')
   .option('-n, --name <name>', 'The account name, eg. Monzo')
   .option('-d, --description <description>', 'The account description')
+  .option('-cId, --currency-id <currencyId>', "The related currency's id")
   .action(viewAccounts);

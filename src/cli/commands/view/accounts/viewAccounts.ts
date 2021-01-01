@@ -1,15 +1,22 @@
 import { accountActions } from '../../../../entity/Account/accountActions';
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { parseDefinedOpts } from '../../../../utils/parseDefinedOpts';
 
 export async function viewAccounts(opts: {
   code?: string;
   name?: string;
   description?: string;
+  currencyId?: string;
 }) {
+  const searchOptions = parseDefinedOpts({
+    ...opts,
+    currencyId: opts.currencyId ? Number(opts.currencyId) : undefined
+  });
+
   try {
     const allAccounts = await accountActions.findAll({
       relations: ['currency'],
-      where: opts
+      where: searchOptions
     });
     if (allAccounts.length === 0) $.logAndExitNotFoundMessage('account');
 

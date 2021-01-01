@@ -15,18 +15,17 @@ export async function addAccount(opts: {
   opened?: string;
   closed?: string;
 }) {
-  const { code, name, description } = opts;
-  const currencyIdString = opts.currencyId;
-  const currencyId = Number(currencyIdString);
+  const currencyId = Number(opts.currencyId);
   const opened = opts.opened ? getDate(opts.opened) : null;
   const closed = opts.closed ? getDate(opts.closed) : null;
+  const description = opts.description ?? '';
   try {
     const currency = await currencyActions.findOne(currencyId);
-    if (!currency) $.logAndExitNotFoundMessage('currency', currencyIdString);
+    if (!currency) $.logAndExitNotFoundMessage('currency', opts.currencyId);
 
     const newAccount: Account = {
-      code,
-      name,
+      code: opts.code,
+      name: opts.name,
       currency,
       description,
       closed,

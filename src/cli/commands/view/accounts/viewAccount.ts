@@ -7,18 +7,22 @@ export async function viewAccount(opts: {
   id?: string;
   name?: string;
   code?: string;
+  currencyId?: string;
 }) {
   const { name, code } = opts;
   const idString = opts.id;
   const id = Number(idString);
+  const currencyId = opts.currencyId ? Number(opts.currencyId) : undefined;
 
-  if (!idString && !name && !code) $.logAndExitNoFilterCriteria();
+  if (!idString && !name && !code && !currencyId) {
+    $.logAndExitNoFilterCriteria();
+  }
 
   try {
     const foundAccount = id
       ? await accountActions.findOne(id, { relations: ['currency'] })
       : await accountActions.findOne(undefined, {
-          where: parseDefinedOpts({ name, code }),
+          where: parseDefinedOpts({ name, code, currencyId }),
           relations: ['currency']
         });
 
