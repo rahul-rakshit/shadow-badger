@@ -4,7 +4,6 @@ import { ModelValidationMessageMap } from '../../validations/validations-d';
 import { table, getBorderCharacters } from 'table';
 import { isEmptyCondition } from './isEmptyCondition';
 import { transformListForLogging } from './transformListForLogging';
-import { findLongestKeyLength } from '../../utils/findLongestKeyLength';
 
 export const processUtil = {
   logAndExitHasDependingEntry(
@@ -84,13 +83,7 @@ export const processUtil = {
   },
   logObject(modelObject: object, collectionName: string) {
     console.log(colors.bold.blue(`Found the following ${collectionName}:`));
-
-    const keyColumnWidth = findLongestKeyLength(modelObject) + 1;
-
-    for (const [key, value] of Object.entries(modelObject)) {
-      const formattedKey = `${key}:`.padEnd(keyColumnWidth);
-      console.log(colors.bold(formattedKey), value);
-    }
+    console.log(modelObject);
   },
   logSuccess(
     verbPastTense: string,
