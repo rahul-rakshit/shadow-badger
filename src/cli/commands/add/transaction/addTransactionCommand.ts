@@ -13,15 +13,15 @@ export const addTransactionCommmand = program
   .requiredOption('-a, --amount <amount>', 'The amount of the transaction')
   .option('-d, --description <description>', "The transaction's description")
   .requiredOption(
-    '-aId, --accountId <accountId>',
+    '-aId, --account-id <accountId>',
     'The id of the referenced account'
   )
   .requiredOption(
-    '-cId, --categoryId <categoryId>',
+    '-cId, --category-id <categoryId>',
     'The id of the referenced category'
   )
   .requiredOption(
-    '-vId, --vendorId <vendorId>',
+    '-vId, --vendor-id <vendorId>',
     'The id of the referenced vendor'
   )
   .action(addTransaction);

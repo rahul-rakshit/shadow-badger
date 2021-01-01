@@ -46,4 +46,16 @@ describe('parseDefinedOpts', () => {
       e: ''
     });
   });
+
+  it('returns an empty object if all values are undefined', () => {
+    const inputObject = {
+      a: undefined,
+      b: undefined,
+      c: undefined
+    };
+
+    const objOfDefinedOpts = parseDefinedOpts(inputObject);
+
+    expect(objOfDefinedOpts).toEqual({});
+  });
 });

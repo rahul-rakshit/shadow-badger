@@ -8,12 +8,19 @@ import { categorySchema } from './src/entity/Category/categorySchema';
 import { accountSchema } from './src/entity/Account/accountSchema';
 import { currencySchema } from './src/entity/Currency/currencySchema';
 import { vendorSchema } from './src/entity/Vendor/vendorSchema';
+import { transactionSchema } from './src/entity/Transaction/transactionSchema';
 
 async function run() {
   await createConnection({
     type: 'sqlite',
     database: 'test.sqlite3',
-    entities: [currencySchema, accountSchema, categorySchema, vendorSchema],
+    entities: [
+      currencySchema,
+      accountSchema,
+      categorySchema,
+      vendorSchema,
+      transactionSchema
+    ],
     synchronize: false
   });
 

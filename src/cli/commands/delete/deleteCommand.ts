@@ -3,6 +3,7 @@ import { deleteCurrencyCommand } from './currency/deleteCurrencyCommand';
 import { deleteAccountCommand } from './account/deleteAccountCommand';
 import { deleteCategoryCommand } from './category/deleteCategoryCommand';
 import { deleteVendorCommand } from './vendor/deleteVendorCommand';
+import { deleteTransactionCommmand } from './transaction/deleteTransactionCommand';
 
 export const deleteCommand = program
   .command('delete')
@@ -10,4 +11,5 @@ export const deleteCommand = program
   .addCommand(deleteCurrencyCommand)
   .addCommand(deleteAccountCommand)
   .addCommand(deleteCategoryCommand)
-  .addCommand(deleteVendorCommand);
+  .addCommand(deleteVendorCommand)
+  .addCommand(deleteTransactionCommmand);

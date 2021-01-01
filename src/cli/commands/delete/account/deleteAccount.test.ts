@@ -1,9 +1,11 @@
 jest.mock('../../../cli-helpers/processUtil');
 jest.mock('../../../../entity/Account/accountActions');
+jest.mock('../../../../entity/Transaction/transactionActions');
 
 import { deleteAccount } from './deleteAccount';
 import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { accountActions } from '../../../../entity/Account/accountActions';
+import { transactionActions } from '../../../../entity/Transaction/transactionActions';
 
 describe('deleteAccount', () => {
   it('deletes the account in the DB if successful', async () => {
@@ -26,6 +28,21 @@ describe('deleteAccount', () => {
     await deleteAccount({ id: '1234' });
 
     expect($.logAndExitNotFoundMessage).toHaveBeenCalledWith('account', '1234');
+  });
+
+  it('exits with a failure if there is a depending transaction', async () => {
+    accountActions.findOne = jest
+      .fn()
+      .mockResolvedValue({ id: 1234, rest: 'dummy account' });
+    transactionActions.findOne = jest.fn().mockResolvedValue('dummy account');
+
+    await deleteAccount({ id: '1234' });
+
+    expect($.logAndExitHasDependingEntry).toHaveBeenCalledWith(
+      'delete',
+      'account',
+      1234
+    );
   });
 
   it('exits with a message when there is an sql engine error', async () => {

@@ -7,6 +7,8 @@ import { viewCategoriesCommand } from './categories/viewCategoriesCommand';
 import { viewCategoryCommand } from './categories/viewCategoryCommand';
 import { viewVendorCommand } from './vendors/viewVendorCommand';
 import { viewVendorsCommand } from './vendors/viewVendorsCommand';
+import { viewTransactionCommand } from './transactions/viewTransactionCommand';
+import { viewTransactionsCommand } from './transactions/viewTransactionsCommand';
 
 export const viewCommand = program
   .command('view <model>')
@@ -18,4 +20,6 @@ export const viewCommand = program
   .addCommand(viewCategoryCommand)
   .addCommand(viewCategoriesCommand)
   .addCommand(viewVendorCommand)
-  .addCommand(viewVendorsCommand);
+  .addCommand(viewVendorsCommand)
+  .addCommand(viewTransactionCommand)
+  .addCommand(viewTransactionsCommand);

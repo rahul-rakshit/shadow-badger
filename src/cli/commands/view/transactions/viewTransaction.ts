@@ -3,6 +3,7 @@ import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { transactionActions } from '../../../../entity/Transaction/transactionActions';
 import { Transaction } from '../../../../entity/Transaction/Transaction-d';
 import { AllowedRelations } from '../../../../entity/generateActionsWrapper';
+import { areOptionsEmpty } from '../../../../utils/areOptionsEmpty';
 
 export async function viewTransaction(opts: {
   id?: string;
@@ -16,14 +17,22 @@ export async function viewTransaction(opts: {
   const idString = opts.id;
   const id = Number(idString);
 
-  if (parseDefinedOpts(opts) === {}) $.logAndExitNoFilterCriteria();
+  if (areOptionsEmpty(opts)) $.logAndExitNoFilterCriteria();
 
   try {
     const relations = ['account', 'category', 'vendor'] as AllowedRelations[];
+    const searchOptions = {
+      ...opts,
+      id: opts.id ? Number(opts.id) : undefined,
+      dateTime: opts.dateTime ? new Date(Date.parse(opts.dateTime)) : undefined,
+      accountId: opts.accountId ? Number(opts.accountId) : undefined,
+      categoryId: opts.categoryId ? Number(opts.categoryId) : undefined,
+      vendorId: opts.vendorId ? Number(opts.vendorId) : undefined
+    };
     const foundTransaction = id
       ? await transactionActions.findOne(id, { relations })
       : await transactionActions.findOne(undefined, {
-          where: parseDefinedOpts({ description: opts.description }),
+          where: parseDefinedOpts(searchOptions),
           relations
         });
 

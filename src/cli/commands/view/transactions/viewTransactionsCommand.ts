@@ -1,12 +1,12 @@
 import { program } from 'commander';
-import { editTransaction } from './editTransaction';
+import { viewTransactions } from './viewTransactions';
 
-export const editTransactionCommand = program
-  .command('transaction')
+export const viewTransactionsCommand = program
+  .command('transactions')
   .storeOptionsAsProperties(false)
   .passCommandToAction(false)
-  .description('find an existing transaction by id and update passed values')
-  .requiredOption('-id, --id, <id>', 'The transaction id')
+  .description('display the first transaction that satisfies certain criteria')
+  .option('-id, --id, <id>', 'The id of the transaction')
   .option('-t, --dateTime, <dateTime>', 'The dateTime the transaction occured')
   .option('-a, --amount <amount>', 'The amount of the transaction')
   .option('-d, --description <description>', "The transaction's description")
@@ -16,4 +16,4 @@ export const editTransactionCommand = program
     'The id of the referenced category'
   )
   .option('-vId, --vendor-id <vendorId>', 'The id of the referenced vendor')
-  .action(editTransaction);
+  .action(viewTransactions);

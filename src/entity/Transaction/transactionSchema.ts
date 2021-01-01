@@ -15,14 +15,11 @@ export const transactionSchema = new EntitySchema<Transaction>({
     dateTime: { type: Date },
     amount: { type: String },
     description: { type: String },
+    accountId: { type: Number },
+    categoryId: { type: Number },
+    vendorId: { type: Number },
     ...schemaCoreColumns
   },
-  uniques: [
-    {
-      name: 'UNIQUE_TEST',
-      columns: ['code']
-    }
-  ],
   relations: {
     account: {
       target: 'account',
