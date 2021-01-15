@@ -18,12 +18,12 @@ describe('addVendor', () => {
 
     await addVendor(rewe);
 
-    const reweWithEmptyDescription = { ...rewe, description: '' };
-    expect(vendorActions.create).toHaveBeenCalledWith(reweWithEmptyDescription);
+    const reweWithEmptyFields = { ...rewe, description: '', tags: [] };
+    expect(vendorActions.create).toHaveBeenCalledWith(reweWithEmptyFields);
     expect($.logSuccess).toHaveBeenCalledWith('added', 'vendor', 'with id 🙃');
   });
 
-  it('adds vendor with empty address, coordinates and description if undefined', async () => {
+  it('adds vendor with empty address, coordinates, description and tags if undefined', async () => {
     vendorActions.create = jest.fn().mockResolvedValue({ id: 'xyz' });
     const iceCreamMan = { name: 'ice cream man' };
 
@@ -33,7 +33,8 @@ describe('addVendor', () => {
       ...iceCreamMan,
       address: '',
       coordinates: '',
-      description: ''
+      description: '',
+      tags: []
     };
     expect(vendorActions.create).toHaveBeenCalledWith(
       iceCreamManWithEmptyOptionalFields
@@ -47,7 +48,7 @@ describe('addVendor', () => {
       coordinates: 'incorrect, coordinates'
     };
     const { value: messageMap } = validateModelObject(
-      iceCreamMan,
+      { ...iceCreamMan, tags: [] },
       vendorValidatorMap
     );
 

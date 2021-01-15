@@ -1,6 +1,6 @@
 import { Either } from '../types-d';
 
-export type Field = string | number | Date;
+export type Field = string | number | Date | string[];
 
 export type ValidationFunction = (val?: Field) => Either<string, true>;
 export type ModelValidatorMap<M> = {

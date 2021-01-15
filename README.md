@@ -6,103 +6,101 @@ This is a command line tool to manage a shadow budget. It is currently in active
 
 This is the planned domain model.
 
-```plantuml
-class Currency << (1, yellow) >> {
-  {field} +id: number;
-  {field} +created_at: Date;
-  {field} +updated_at: Date;
-  {field} +version: number;
-  ..
-  {field} +code: string; (unique)
-  {field} +name: string; (unique)
-  {field} +symbol: string;
-  {field} +description?: string;
+```mermaid
+classDiagram
+
+class Currency {
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
+  ---
+  string: code [unique] ✅
+  string: name [unique] ✅
+  string: symbol ✅
+  string?: description ✅
 }
 
-class Category << (1, yellow) >> {
-  {field} +id: number;
-  {field} +created_at: Date;
-  {field} +updated_at: Date;
-  {field} +version: number;
-  ..
-  {field} +code: string; (unique)
-  {field} +name: string; (unique)
-  {field} +description?: string;
+class Category {
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
+  ---
+  string: code [unique] ✅
+  string: name [unique] ✅
+  string?: description ✅
 }
 
-class Account << (1, yellow) >> {
-  {field} +id: number;
-  {field} +created_at: Date;
-  {field} +updated_at: Date;
-  {field} +version: number;
-  ..
-  {field} +code: string; (unique)
-  {field} +name: string;
-  {field} +opened?: Date;
-  {field} +closed?: Date;
-  {field} +description?: string;
-  ..
-  {field} +currencyId: number;
+class Account {
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
+  ---
+  string: code [unique] ✅
+  string: name [unique] ✅
+  Date?: opened ✅
+  Date?: closed ✅
+  string?: description ✅
+  ---
+  number: currencyId ✅
 }
 
-class Vendor << (1, yellow) >> {
-  {field} +id: number;
-  {field} +created_at: Date;
-  {field} +updated_at: Date;
-  {field} +version: number;
-  {field} -tags?: string[];
-  ..
-  {field} +name: string;
-  {field} +address?: string;
-  {field} +coordinates?: string;
-  {field} +description?: string;
+class Vendor {
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
+  ---
+  string[]: tags 🔁
+  string: name [unique] ✅
+  string?: address ✅
+  string?: coordinates ✅
+  string?: description ✅
 }
 
-class Transaction << (1, yellow) >> {
-  {field} +id: number;
-  {field} +created_at: Date;
-  {field} +updated_at: Date;
-  {field} +version: number;
-  ..
-  {field} +dateTime: Date;
-  {field} -amount: string;
-  {field} +description?: string;
-  {field} -tags?: string[];
-  ..
-  {field} +accountId: number;
-  {field} +categoryId: number;
-  {field} +vendorId: number;
+class Transaction {
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
+  ---
+  Date: dateTime ✅
+  string?: amount ❌
+  string?: description ✅
+  string[]: tags ❌
+  ---
+  number: accountId ✅
+  number: categoryId ✅
+  number: vendorId ✅
 }
 
-class Snapshot << (2, orange )>> {
-  {field} -id: number;
-  {field} -created_at: Date;
-  {field} -updated_at: Date;
-  {field} -version: number;
-  ..
-  {field} -dateTime: Date;
-  {field} -balance: string;
-  ..
-  {field} -accountId: number;
+class Snapshot {
+  primaryKey: id ❌
+  Date: createdAt ❌
+  Date: updatedAt ❌
+  number: version ❌
+  ---
+  Date: dateTime ❌
+  string: balance ❌
+  string?: description ❌
+  ---
+  number: accountId ❌
 }
 
-Currency --|> Account: 1:n
-Account --|> Transaction: 1:n
-Category --|> Transaction: 1:n
-Vendor --|> Transaction: 1:n
-Account --|> Snapshot: 1:n
+Currency --> Account: one to many
+Account --> Transaction: one to many
+Category --> Transaction: one to many
+Vendor --> Transaction: one to many
+Account --> Snapshot: one to many
 ```
-
-**Legend**:
-
-- green circles: already implemented fields
-- yellow diamond: implemented but not yet tested field
-- red squares: yet to be implemented fields
-- "1" in a yellow circle: stage 1 plans
-- "2" in an orange circle: stage 2 plans
 
 ## Next Steps
 
+- implement tags for vendors and transactions as simple array fields
+- make view commmands work by regex
+- snapshots
+- implement view-tags command for vendors and transactions
 - make accounts and transactions viewable by relation id
-- snapshots (again, amounts as strings of valid numbers)
-- remove vendor groups and transaction groups; to be implemented as simple arrays
+- make vendors searchable by GPS with precision

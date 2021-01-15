@@ -4,14 +4,16 @@ import { processUtil as $ } from '../../../cli-helpers/processUtil';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { vendorValidatorMap } from '../../../../entity/Vendor/vendorValidatorMap';
 import { failed } from '../../../../types-d';
+import { tagify } from '../../../../utils/tagify';
 
 export async function addVendor(opts: {
   name: string;
   address?: string;
   coordinates?: string;
   description?: string;
+  tags?: string;
 }) {
-  const newVendor: Vendor = { ...opts };
+  const newVendor: Vendor = { ...opts, tags: tagify(opts.tags) };
   if (opts.description === undefined) newVendor.description = '';
   if (opts.address === undefined) newVendor.address = '';
   if (opts.coordinates === undefined) newVendor.coordinates = '';

@@ -5,6 +5,7 @@ export interface VendorDomainFields {
   coordinates?: string;
   address?: string;
   description?: string;
+  tags?: string[];
 }
 
 export type Vendor = { id?: number } & VendorDomainFields & DbCoreFields;

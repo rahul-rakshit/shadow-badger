@@ -8,8 +8,9 @@ export const vendorSchema = new EntitySchema<Vendor>({
     ...idColumn,
     name: { type: String },
     address: { type: String },
-    description: { type: String },
     coordinates: { type: String },
+    description: { type: String },
+    tags: { type: 'simple-array' },
     ...schemaCoreColumns
   },
   uniques: [

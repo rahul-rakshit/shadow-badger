@@ -103,7 +103,7 @@ export const viewTransactionsDummyTransactions: Transaction[] = [
 export const viewTransactionsLog = [
   {
     id: 8,
-    dateTime: getDate('2017/02/02'),
+    dateTime: getDate('2017/02/02').toISOString(),
     amount: '724.94',
     account: viewTransactionsDummyVolksbank.code,
     category: viewTransactionsDummyRent.code,
@@ -111,7 +111,7 @@ export const viewTransactionsLog = [
   },
   {
     id: 13,
-    dateTime: getDate('2017/02/03'),
+    dateTime: getDate('2017/02/03').toISOString(),
     amount: '32.42',
     account: viewTransactionsDummySparkasse.code,
     category: viewTransactionsDummyGroceries.code,
@@ -119,7 +119,7 @@ export const viewTransactionsLog = [
   },
   {
     id: 14,
-    dateTime: getDate('2017/02/03'),
+    dateTime: getDate('2017/02/03').toISOString(),
     amount: '0.92',
     account: viewTransactionsDummySparkasse.code,
     category: viewTransactionsDummyGroceries.code,

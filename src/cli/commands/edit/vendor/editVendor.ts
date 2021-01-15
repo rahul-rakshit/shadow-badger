@@ -4,6 +4,8 @@ import { Vendor } from '../../../../entity/Vendor/Vendor-d';
 import { validateModelObject } from '../../../../validations/validateModelObject';
 import { vendorValidatorMap } from '../../../../entity/Vendor/vendorValidatorMap';
 import { failed } from '../../../../types-d';
+import { isNullish } from '../../../../utils/isNullish';
+import { tagify } from '../../../../utils/tagify';
 
 export async function editVendor(opts: {
   id: string;
@@ -11,10 +13,11 @@ export async function editVendor(opts: {
   coordinates?: string;
   address?: string;
   description?: string;
+  tags?: string;
 }) {
   const idString = opts.id;
   const id = Number(idString);
-  const { name, coordinates, address, description } = opts;
+  const { name, coordinates, address, description, tags } = opts;
 
   try {
     const foundVendor = await vendorActions.findOne(id);
@@ -25,7 +28,7 @@ export async function editVendor(opts: {
     if (coordinates !== undefined) vendor.coordinates = coordinates;
     if (address !== undefined) vendor.address = address;
     if (description !== undefined) vendor.description = description;
-
+    if (!isNullish(tags)) vendor.tags = tagify(opts.tags, vendor.tags);
     const validation = validateModelObject<Vendor>(vendor, vendorValidatorMap);
 
     if (failed(validation)) {

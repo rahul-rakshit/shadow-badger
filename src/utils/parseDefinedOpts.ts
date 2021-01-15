@@ -1,3 +1,5 @@
+import { isNullish } from './isNullish';
+
 export function parseDefinedOpts<O>(opts: O) {
   return Object.entries(opts).reduce<Partial<O>>(
     (accumulator, [key, value]) => {
@@ -6,8 +8,4 @@ export function parseDefinedOpts<O>(opts: O) {
     },
     {}
   );
-}
-
-function isNullish(value: any) {
-  return value === null || value === undefined;
 }
