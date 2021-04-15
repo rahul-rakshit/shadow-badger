@@ -99,6 +99,9 @@ Account --> Snapshot: one to many
 ## Next Steps
 
 - implement tags for vendors and transactions as simple array fields
+  - [ ] rename tagify to tag
+  - [ ] rename remove-tag to untag
+  - [ ] add remove-tag command and function
 - make view commmands work by regex
 - snapshots
 - implement view-tags command for vendors and transactions
