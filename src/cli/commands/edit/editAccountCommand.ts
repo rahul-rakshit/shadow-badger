@@ -1,5 +1,6 @@
 import { program } from 'commander';
-import { editAccount } from './editAccount';
+import { editAccount } from '../../../actions/editAccount';
+
 export const editAccountCommand = program
   .command('account')
   .storeOptionsAsProperties(false)

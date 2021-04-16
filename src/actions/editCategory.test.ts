@@ -1,11 +1,11 @@
-jest.mock('../../../cli-helpers/processUtil');
-jest.mock('../../../../entity/Category/categoryActions');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Category/categoryActions');
 
-import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { categoryActions } from '../entity/Category/categoryActions';
 import { editCategory } from './editCategory';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
+import { validateModelObject } from '../validations/validateModelObject';
+import { categoryValidatorMap } from '../entity/Category/categoryValidatorMap';
 
 describe('editCategory', () => {
   it("exits with a failure when the passed category's id is invalid", async () => {

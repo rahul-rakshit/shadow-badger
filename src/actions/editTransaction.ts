@@ -1,14 +1,14 @@
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { Transaction } from '../../../../entity/Transaction/Transaction-d';
-import { getDate } from '../../../../utils/getDate';
-import { isNullish } from '../../../../utils/isNullish';
-import { accountActions } from '../../../../entity/Account/accountActions';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { transactionValidatorMap } from '../../../../entity/Transaction/transactionValidatorMap';
-import { failed } from '../../../../types-d';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { transactionActions } from '../entity/Transaction/transactionActions';
+import { Transaction } from '../entity/Transaction/Transaction-d';
+import { getDate } from '../utils/getDate';
+import { isNullish } from '../utils/isNullish';
+import { accountActions } from '../entity/Account/accountActions';
+import { categoryActions } from '../entity/Category/categoryActions';
+import { vendorActions } from '../entity/Vendor/vendorActions';
+import { validateModelObject } from '../validations/validateModelObject';
+import { transactionValidatorMap } from '../entity/Transaction/transactionValidatorMap';
+import { failed } from '../types-d';
 
 export async function editTransaction(opts: {
   id: string;

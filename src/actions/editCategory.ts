@@ -1,9 +1,9 @@
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
-import { Category } from '../../../../entity/Category/Category-d';
-import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { failed } from '../../../../types-d';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { categoryActions } from '../entity/Category/categoryActions';
+import { Category } from '../entity/Category/Category-d';
+import { validateModelObject } from '../validations/validateModelObject';
+import { categoryValidatorMap } from '../entity/Category/categoryValidatorMap';
+import { failed } from '../types-d';
 
 export async function editCategory(opts: {
   id: string;

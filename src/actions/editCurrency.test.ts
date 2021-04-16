@@ -1,11 +1,11 @@
-jest.mock('../../../../entity/Currency/currencyActions');
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Currency/currencyActions');
 
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { currencyActions } from '../entity/Currency/currencyActions';
 import { editCurrency } from './editCurrency';
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
-import { processUtil } from '../../../cli-helpers/processUtil';
+import { currencyValidatorMap } from '../entity/Currency/currencyValidatorMap';
+import { validateModelObject } from '../validations/validateModelObject';
 
 describe('editCurrency', () => {
   it("exits with a failure when the passed currency's id is invalid", async () => {
@@ -15,7 +15,7 @@ describe('editCurrency', () => {
     await editCurrency(currencyToEdit);
 
     expect(currencyActions.findOne).toHaveBeenCalledWith(1234);
-    expect(processUtil.logAndExitNotFoundMessage).toHaveBeenCalledWith(
+    expect($.logAndExitNotFoundMessage).toHaveBeenCalledWith(
       'currency',
       '1234'
     );
@@ -41,7 +41,7 @@ describe('editCurrency', () => {
 
     await editCurrency({ ...gbpUpdate, id: '1' });
 
-    expect(processUtil.logAndExitOnValidationFailure).toHaveBeenCalledWith(
+    expect($.logAndExitOnValidationFailure).toHaveBeenCalledWith(
       'edit',
       'currency',
       messageMap
@@ -65,7 +65,7 @@ describe('editCurrency', () => {
     await editCurrency({ ...gbpUpdate, id: '1' });
 
     expect(currencyActions.edit).toHaveBeenCalledWith(gbpUpdate);
-    expect(processUtil.logSuccess).toHaveBeenCalledWith(
+    expect($.logSuccess).toHaveBeenCalledWith(
       'edited',
       'currency',
       'with id 1'
@@ -93,7 +93,7 @@ describe('editCurrency', () => {
     expect(currencyActions.edit).toHaveBeenCalledWith(
       currencyWithResetDescription
     );
-    expect(processUtil.logSuccess).toHaveBeenCalledWith(
+    expect($.logSuccess).toHaveBeenCalledWith(
       'edited',
       'currency',
       'with id 2'
@@ -107,7 +107,7 @@ describe('editCurrency', () => {
 
     await editCurrency({ id: '1234', code: 'WAT' });
 
-    expect(processUtil.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
+    expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
       'edit',
       'currency',
       'AAAAAAAAaaaaaaaAAAAAAAAaaaaaaaaa'

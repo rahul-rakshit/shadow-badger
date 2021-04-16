@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { editCurrency } from './editCurrency';
+import { editCurrency } from '../../../actions/editCurrency';
 
 export const editCurrencyCommand = program
   .command('currency')

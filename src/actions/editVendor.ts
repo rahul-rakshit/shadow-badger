@@ -1,11 +1,11 @@
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { Vendor } from '../../../../entity/Vendor/Vendor-d';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { vendorValidatorMap } from '../../../../entity/Vendor/vendorValidatorMap';
-import { failed } from '../../../../types-d';
-import { isNullish } from '../../../../utils/isNullish';
-import { tagify } from '../../../../utils/tagify';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { vendorActions } from '../entity/Vendor/vendorActions';
+import { Vendor } from '../entity/Vendor/Vendor-d';
+import { isNullish } from '../utils/isNullish';
+import { tagify } from '../utils/tagify';
+import { validateModelObject } from '../validations/validateModelObject';
+import { vendorValidatorMap } from '../entity/Vendor/vendorValidatorMap';
+import { failed } from '../types-d';
 
 export async function editVendor(opts: {
   id: string;
