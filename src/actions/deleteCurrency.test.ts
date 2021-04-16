@@ -1,9 +1,11 @@
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Currency/currencyActions');
+jest.mock('../entity/Account/accountActions');
 
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { currencyActions } from '../entity/Currency/currencyActions';
 import { deleteCurrency } from './deleteCurrency';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { accountActions } from '../../../../entity/Account/accountActions';
+import { accountActions } from '../entity/Account/accountActions';
 
 describe('deleteCurrency', () => {
   it("exits with a failure when the passed currency's id is invalid", async () => {

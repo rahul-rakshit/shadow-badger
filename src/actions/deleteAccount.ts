@@ -1,6 +1,6 @@
-import { accountActions } from '../../../../entity/Account/accountActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { accountActions } from '../entity/Account/accountActions';
+import { transactionActions } from '../entity/Transaction/transactionActions';
 
 export async function deleteAccount({ id: idString }: { id: string }) {
   try {

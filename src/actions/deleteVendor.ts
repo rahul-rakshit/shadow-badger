@@ -1,5 +1,5 @@
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { vendorActions } from '../entity/Vendor/vendorActions';
 
 export async function deleteVendor({ id: idString }: { id: string }) {
   try {

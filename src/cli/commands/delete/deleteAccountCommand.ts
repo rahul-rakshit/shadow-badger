@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { deleteAccount } from './deleteAccount';
+import { deleteAccount } from '../../../actions/deleteAccount';
 
 export const deleteAccountCommand = program
   .command('account')

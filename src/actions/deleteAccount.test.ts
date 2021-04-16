@@ -1,11 +1,11 @@
-jest.mock('../../../cli-helpers/processUtil');
-jest.mock('../../../../entity/Account/accountActions');
-jest.mock('../../../../entity/Transaction/transactionActions');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Account/accountActions');
+jest.mock('../entity/Transaction/transactionActions');
 
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { accountActions } from '../entity/Account/accountActions';
 import { deleteAccount } from './deleteAccount';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { accountActions } from '../../../../entity/Account/accountActions';
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
+import { transactionActions } from '../entity/Transaction/transactionActions';
 
 describe('deleteAccount', () => {
   it('deletes the account in the DB if successful', async () => {

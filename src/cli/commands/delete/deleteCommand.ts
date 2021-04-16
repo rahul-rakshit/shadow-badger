@@ -1,9 +1,9 @@
 import { program } from 'commander';
-import { deleteCurrencyCommand } from './currency/deleteCurrencyCommand';
-import { deleteAccountCommand } from './account/deleteAccountCommand';
-import { deleteCategoryCommand } from './category/deleteCategoryCommand';
-import { deleteVendorCommand } from './vendor/deleteVendorCommand';
-import { deleteTransactionCommmand } from './transaction/deleteTransactionCommand';
+import { deleteCurrencyCommand } from './deleteCurrencyCommand';
+import { deleteAccountCommand } from './deleteAccountCommand';
+import { deleteCategoryCommand } from './deleteCategoryCommand';
+import { deleteVendorCommand } from './deleteVendorCommand';
+import { deleteTransactionCommmand } from './deleteTransactionCommand';
 
 export const deleteCommand = program
   .command('delete')

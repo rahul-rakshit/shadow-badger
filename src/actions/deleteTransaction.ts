@@ -1,5 +1,5 @@
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { transactionActions } from '../entity/Transaction/transactionActions';
 
 export async function deleteTransaction({ id: idString }: { id: string }) {
   try {

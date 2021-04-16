@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { deleteCategory } from './deleteCategory';
+import { deleteCategory } from '../../../actions/deleteCategory';
 
 export const deleteCategoryCommand = program
   .command('category')

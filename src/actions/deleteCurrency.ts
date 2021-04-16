@@ -1,6 +1,6 @@
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { accountActions } from '../../../../entity/Account/accountActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { currencyActions } from '../entity/Currency/currencyActions';
+import { accountActions } from '../entity/Account/accountActions';
 
 export async function deleteCurrency({ id: idString }: { id: string }) {
   try {

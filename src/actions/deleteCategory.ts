@@ -1,5 +1,5 @@
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { categoryActions } from '../entity/Category/categoryActions';
 
 export async function deleteCategory({ id: idString }: { id: string }) {
   const id = Number(idString);

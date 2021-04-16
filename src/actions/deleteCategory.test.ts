@@ -1,8 +1,8 @@
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../cli/cli-helpers/processUtil');
 
-import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { categoryActions } from '../entity/Category/categoryActions';
 import { deleteCategory } from './deleteCategory';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 describe('deleteCategory', () => {
   it("exits with a failure when the passed currency's id is invalid", async () => {

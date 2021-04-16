@@ -1,9 +1,9 @@
-jest.mock('../../../../entity/Vendor/vendorActions');
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Vendor/vendorActions');
 
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { vendorActions } from '../entity/Vendor/vendorActions';
 import { deleteVendor } from './deleteVendor';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
 
 describe('deleteVendor', () => {
   it('deletes the vendor in the DB if successful', async () => {
