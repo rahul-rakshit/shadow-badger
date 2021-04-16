@@ -1,13 +1,13 @@
-jest.mock('../../../../entity/Currency/currencyActions');
-jest.mock('../../../../entity/Account/accountActions');
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../entity/Currency/currencyActions');
+jest.mock('../entity/Account/accountActions');
+jest.mock('../cli/cli-helpers/processUtil');
 
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { accountActions } from '../../../../entity/Account/accountActions';
+import { currencyActions } from '../entity/Currency/currencyActions';
+import { accountActions } from '../entity/Account/accountActions';
 import { addAccount } from './addAccount';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { accountValidatorMap } from '../../../../entity/Account/accountValidatorMap';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { validateModelObject } from '../validations/validateModelObject';
+import { accountValidatorMap } from '../entity/Account/accountValidatorMap';
 
 describe('addAccount', () => {
   beforeEach(jest.resetAllMocks);

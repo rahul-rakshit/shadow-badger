@@ -1,16 +1,16 @@
-jest.mock('../../../../entity/Account/accountActions');
-jest.mock('../../../../entity/Category/categoryActions');
-jest.mock('../../../../entity/Vendor/vendorActions');
-jest.mock('../../../cli-helpers/processUtil');
+jest.mock('../entity/Account/accountActions');
+jest.mock('../entity/Category/categoryActions');
+jest.mock('../entity/Vendor/vendorActions');
+jest.mock('../cli/cli-helpers/processUtil');
 
-import { accountActions } from '../../../../entity/Account/accountActions';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { accountActions } from '../entity/Account/accountActions';
+import { categoryActions } from '../entity/Category/categoryActions';
+import { vendorActions } from '../entity/Vendor/vendorActions';
+import { transactionActions } from '../entity/Transaction/transactionActions';
 import { addTransaction } from './addTransaction';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { transactionValidatorMap } from '../../../../entity/Transaction/transactionValidatorMap';
+import { validateModelObject } from '../validations/validateModelObject';
+import { transactionValidatorMap } from '../entity/Transaction/transactionValidatorMap';
 
 describe('addTransaction', () => {
   beforeEach(jest.resetAllMocks);

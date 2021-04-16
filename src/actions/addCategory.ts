@@ -1,10 +1,9 @@
-import { Category } from '../../../../entity/Category/Category-d';
-
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { categoryValidatorMap } from '../../../../entity/Category/categoryValidatorMap';
-import { failed } from '../../../../types-d';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { Category } from '../entity/Category/Category-d';
+import { validateModelObject } from '../validations/validateModelObject';
+import { categoryValidatorMap } from '../entity/Category/categoryValidatorMap';
+import { failed } from '../types-d';
+import { categoryActions } from '../entity/Category/categoryActions';
 
 export async function addCategory(opts: {
   name: string;

@@ -98,6 +98,7 @@ Account --> Snapshot: one to many
 
 ## Next Steps
 
+- extract all things as actions
 - implement tags for vendors and transactions as simple array fields
   - [ ] rename tagify to tag
   - [ ] rename remove-tag to untag

@@ -1,9 +1,9 @@
-import { Currency } from '../../../../entity/Currency/Currency-d';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
-import { failed } from '../../../../types-d';
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { Currency } from '../entity/Currency/Currency-d';
+import { validateModelObject } from '../validations/validateModelObject';
+import { currencyValidatorMap } from '../entity/Currency/currencyValidatorMap';
+import { failed } from '../types-d';
+import { currencyActions } from '../entity/Currency/currencyActions';
 
 export async function addCurrency(opts: {
   name: string;

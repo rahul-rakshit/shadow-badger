@@ -1,11 +1,11 @@
-jest.mock('../../../cli-helpers/processUtil');
-jest.mock('../../../../entity/Vendor/vendorActions');
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Vendor/vendorActions');
 
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { vendorActions } from '../entity/Vendor/vendorActions';
 import { addVendor } from './addVendor';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { vendorValidatorMap } from '../../../../entity/Vendor/vendorValidatorMap';
+import { validateModelObject } from '../validations/validateModelObject';
+import { vendorValidatorMap } from '../entity/Vendor/vendorValidatorMap';
 
 describe('addVendor', () => {
   it('adds a vendor to DB if successful', async () => {

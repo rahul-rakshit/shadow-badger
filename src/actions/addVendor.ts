@@ -1,10 +1,10 @@
-import { Vendor } from '../../../../entity/Vendor/Vendor-d';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { vendorValidatorMap } from '../../../../entity/Vendor/vendorValidatorMap';
-import { failed } from '../../../../types-d';
-import { tagify } from '../../../../utils/tagify';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { Vendor } from '../entity/Vendor/Vendor-d';
+import { tagify } from '../utils/tagify';
+import { validateModelObject } from '../validations/validateModelObject';
+import { vendorValidatorMap } from '../entity/Vendor/vendorValidatorMap';
+import { failed } from '../types-d';
+import { vendorActions } from '../entity/Vendor/vendorActions';
 
 export async function addVendor(opts: {
   name: string;

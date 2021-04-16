@@ -1,11 +1,11 @@
-jest.mock('../../../../entity/Currency/currencyActions');
-jest.mock('../../../cli-helpers/processUtil');
-
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { currencyValidatorMap } from '../../../../entity/Currency/currencyValidatorMap';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { validateModelObject } from '../validations/validateModelObject';
+import { currencyValidatorMap } from '../entity/Currency/currencyValidatorMap';
 import { addCurrency } from './addCurrency';
-import { currencyActions } from '../../../../entity/Currency/currencyActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { currencyActions } from '../entity/Currency/currencyActions';
+
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Currency/currencyActions');
 
 describe('addCurrency', () => {
   beforeEach(jest.resetAllMocks);

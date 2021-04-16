@@ -1,13 +1,13 @@
-import { getDate } from '../../../../utils/getDate';
-import { accountActions } from '../../../../entity/Account/accountActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { categoryActions } from '../../../../entity/Category/categoryActions';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { Transaction } from '../../../../entity/Transaction/Transaction-d';
-import { validateModelObject } from '../../../../validations/validateModelObject';
-import { transactionValidatorMap } from '../../../../entity/Transaction/transactionValidatorMap';
-import { failed } from '../../../../types-d';
-import { transactionActions } from '../../../../entity/Transaction/transactionActions';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { getDate } from '../utils/getDate';
+import { accountActions } from '../entity/Account/accountActions';
+import { categoryActions } from '../entity/Category/categoryActions';
+import { vendorActions } from '../entity/Vendor/vendorActions';
+import { Transaction } from '../entity/Transaction/Transaction-d';
+import { validateModelObject } from '../validations/validateModelObject';
+import { transactionValidatorMap } from '../entity/Transaction/transactionValidatorMap';
+import { failed } from '../types-d';
+import { transactionActions } from '../entity/Transaction/transactionActions';
 
 export async function addTransaction(opts: {
   dateTime: string;
