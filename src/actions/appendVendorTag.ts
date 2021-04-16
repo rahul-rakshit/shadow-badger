@@ -1,7 +1,7 @@
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
-import { Vendor } from '../../../../entity/Vendor/Vendor-d';
-import { tagify } from '../../../../utils/tagify';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { vendorActions } from '../entity/Vendor/vendorActions';
+import { Vendor } from '../entity/Vendor/Vendor-d';
+import { tagify } from '../utils/tagify';
 
 export async function appendVendorTag(opts: { id: string; tags: string }) {
   const idString = opts.id;

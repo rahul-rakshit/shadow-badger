@@ -1,10 +1,10 @@
-jest.mock('../../../cli-helpers/processUtil');
-jest.mock('../../../../entity/Vendor/vendorActions');
-
-import { Vendor } from '../../../../entity/Vendor/Vendor-d';
-import { vendorActions } from '../../../../entity/Vendor/vendorActions';
-import { processUtil as $ } from '../../../cli-helpers/processUtil';
+import { processUtil as $ } from '../cli/cli-helpers/processUtil';
+import { Vendor } from '../entity/Vendor/Vendor-d';
+import { vendorActions } from '../entity/Vendor/vendorActions';
 import { appendVendorTag } from './appendVendorTag';
+
+jest.mock('../cli/cli-helpers/processUtil');
+jest.mock('../entity/Vendor/vendorActions');
 
 describe('appendVendorTag', () => {
   it('appends vendor tags to vendor in DB if successful', async () => {

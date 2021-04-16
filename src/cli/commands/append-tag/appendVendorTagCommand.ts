@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { appendVendorTag } from './appendVendorTag';
+import { appendVendorTag } from '../../../actions/appendVendorTag';
 
 export const appendVendorTagCommand = program
   .command('vendor')
