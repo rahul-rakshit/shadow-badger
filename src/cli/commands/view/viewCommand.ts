@@ -1,14 +1,14 @@
 import { program } from 'commander';
-import { viewCurrenciesCommand } from './currencies/viewCurrenciesCommand';
-import { viewCurrencyCommand } from './currencies/viewCurrencyCommand';
-import { viewAccountsCommand } from './accounts/viewAccountsCommand';
-import { viewAccountCommand } from './accounts/viewAccountCommand';
-import { viewCategoriesCommand } from './categories/viewCategoriesCommand';
-import { viewCategoryCommand } from './categories/viewCategoryCommand';
-import { viewVendorCommand } from './vendors/viewVendorCommand';
-import { viewVendorsCommand } from './vendors/viewVendorsCommand';
-import { viewTransactionCommand } from './transactions/viewTransactionCommand';
-import { viewTransactionsCommand } from './transactions/viewTransactionsCommand';
+import { viewCurrencyCommand } from './viewCurrencyCommand';
+import { viewCurrenciesCommand } from './viewCurrenciesCommand';
+import { viewAccountCommand } from './viewAccountCommand';
+import { viewAccountsCommand } from './viewAccountsCommand';
+import { viewCategoryCommand } from './viewCategoryCommand';
+import { viewCategoriesCommand } from './viewCategoriesCommand';
+import { viewVendorCommand } from './viewVendorCommand';
+import { viewVendorsCommand } from './viewVendorsCommand';
+import { viewTransactionCommand } from './viewTransactionCommand';
+import { viewTransactionsCommand } from './viewTransactionsCommand';
 
 export const viewCommand = program
   .command('view <model>')
