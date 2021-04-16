@@ -99,9 +99,9 @@ Account --> Snapshot: one to many
 ## Next Steps
 
 - implement tags for vendors and transactions as simple array fields
-  - [ ] rename tagify to tag
-  - [ ] rename remove-tag to untag
-  - [ ] add remove-tag command and function
+  - [x] rename tagify to tag
+  - [x] rename remove-tag to untag
+  - [ ] add untag command and function to all taggable models
 - make view commands work by regex
 - snapshots
 - implement view-tags command for vendors and transactions

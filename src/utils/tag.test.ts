@@ -1,10 +1,10 @@
-import { tagify } from './tagify';
+import { tag } from './tag';
 
-describe('tagify', () => {
+describe('tag', () => {
   it('converts a comma-separated string into an array of tags', () => {
     const inputString = 'fruits,vegetables,cheeses';
 
-    const tagsList = tagify(inputString);
+    const tagsList = tag(inputString);
 
     expect(tagsList).toEqual(['fruits', 'vegetables', 'cheeses']);
   });
@@ -13,7 +13,7 @@ describe('tagify', () => {
     const previousTags = ['bus'];
     const inputString = 'car,bicycle,motorcycle';
 
-    const tagsList = tagify(inputString, previousTags);
+    const tagsList = tag(inputString, previousTags);
 
     expect(tagsList).toEqual(['bus', 'car', 'bicycle', 'motorcycle']);
   });
@@ -22,7 +22,7 @@ describe('tagify', () => {
     const previousTags = ['onion'];
     const inputString = 'garlic,hing,onion';
 
-    const tagsList = tagify(inputString, previousTags);
+    const tagsList = tag(inputString, previousTags);
 
     expect(tagsList).toEqual(['onion', 'garlic', 'hing']);
   });
@@ -31,7 +31,7 @@ describe('tagify', () => {
     const previousTags = ['  boat', 'dingy'];
     const inputString = 'ship , canoe, boat';
 
-    const tagsList = tagify(inputString, previousTags);
+    const tagsList = tag(inputString, previousTags);
 
     expect(tagsList).toEqual(['boat', 'dingy', 'ship', 'canoe']);
   });
@@ -39,7 +39,7 @@ describe('tagify', () => {
   it('removes empty strings from tagsList', () => {
     const inputString = '   ';
 
-    const tagsList = tagify(inputString);
+    const tagsList = tag(inputString);
 
     expect(tagsList).toEqual([]);
   });
@@ -47,7 +47,7 @@ describe('tagify', () => {
   it('treats an undefined input as no input as well', () => {
     const inputString = undefined;
 
-    const tagsList = tagify(inputString);
+    const tagsList = tag(inputString);
 
     expect(tagsList).toEqual([]);
   });

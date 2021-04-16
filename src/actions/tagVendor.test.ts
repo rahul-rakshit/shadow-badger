@@ -1,12 +1,12 @@
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { Vendor } from '../entity/Vendor/Vendor-d';
 import { vendorActions } from '../entity/Vendor/vendorActions';
-import { appendVendorTag } from './appendVendorTag';
+import { tagVendor } from './tagVendor';
 
 jest.mock('../cli/cli-helpers/processUtil');
 jest.mock('../entity/Vendor/vendorActions');
 
-describe('appendVendorTag', () => {
+describe('tagVendor', () => {
   it('appends vendor tags to vendor in DB if successful', async () => {
     const rewe: Vendor = {
       id: 1,
@@ -17,8 +17,8 @@ describe('appendVendorTag', () => {
     };
     vendorActions.findOne = jest.fn().mockResolvedValue(rewe);
 
-    const appendTagsOptions = { id: '1', tags: 'Food, Spinach' };
-    await appendVendorTag(appendTagsOptions);
+    const tagVendorOptions = { id: '1', tags: 'Food, Spinach' };
+    await tagVendor(tagVendorOptions);
 
     const updatedRewe = { ...rewe, tags: ['Supermarket', 'Food', 'Spinach'] };
     expect(vendorActions.edit).toHaveBeenCalledWith(updatedRewe);

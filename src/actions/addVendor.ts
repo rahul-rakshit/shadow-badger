@@ -1,10 +1,10 @@
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { Vendor } from '../entity/Vendor/Vendor-d';
-import { tagify } from '../utils/tagify';
 import { validateModelObject } from '../validations/validateModelObject';
 import { vendorValidatorMap } from '../entity/Vendor/vendorValidatorMap';
 import { failed } from '../types-d';
 import { vendorActions } from '../entity/Vendor/vendorActions';
+import { tag } from '../utils/tag';
 
 export async function addVendor(opts: {
   name: string;
@@ -13,7 +13,7 @@ export async function addVendor(opts: {
   description?: string;
   tags?: string;
 }) {
-  const newVendor: Vendor = { ...opts, tags: tagify(opts.tags) };
+  const newVendor: Vendor = { ...opts, tags: tag(opts.tags) };
   if (opts.description === undefined) newVendor.description = '';
   if (opts.address === undefined) newVendor.address = '';
   if (opts.coordinates === undefined) newVendor.coordinates = '';

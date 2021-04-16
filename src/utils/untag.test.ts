@@ -1,11 +1,11 @@
-import { removeTag } from './removeTag';
+import { untag } from './untag';
 
-describe('removeTag', () => {
+describe('untag', () => {
   it('removes a tag from a comma-separated string of tags', () => {
     const tagToRemove = 'vegetables';
     const tags = ['fruits', 'vegetables', 'cheeses'];
 
-    const newTags = removeTag(tags, tagToRemove);
+    const newTags = untag(tags, tagToRemove);
 
     expect(newTags).toEqual(['fruits', 'cheeses']);
   });
@@ -14,7 +14,7 @@ describe('removeTag', () => {
     const tagToRemove = 'forklifts';
     const tags = ['fruits', 'vegetables', 'cheeses'];
 
-    const newTags = removeTag(tags, tagToRemove);
+    const newTags = untag(tags, tagToRemove);
 
     expect(newTags).toEqual(['fruits', 'vegetables', 'cheeses']);
   });
@@ -23,7 +23,7 @@ describe('removeTag', () => {
     const tagToRemove = ' onion \t';
     const tags = ['screw', 'bolt', 'wrench', 'onion', 'pull saw', 'sand paper'];
 
-    const newTags = removeTag(tags, tagToRemove);
+    const newTags = untag(tags, tagToRemove);
 
     expect(newTags).toEqual([
       'screw',

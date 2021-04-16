@@ -1,9 +1,9 @@
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { vendorActions } from '../entity/Vendor/vendorActions';
 import { Vendor } from '../entity/Vendor/Vendor-d';
-import { tagify } from '../utils/tagify';
+import { tag } from '../utils/tag';
 
-export async function appendVendorTag(opts: { id: string; tags: string }) {
+export async function tagVendor(opts: { id: string; tags: string }) {
   const idString = opts.id;
   const id = Number(idString);
 
@@ -12,7 +12,7 @@ export async function appendVendorTag(opts: { id: string; tags: string }) {
     if (!foundVendor) $.logAndExitNotFoundMessage('vendor', idString);
     const vendor = foundVendor as Vendor;
 
-    vendor.tags = tagify(opts.tags, vendor.tags);
+    vendor.tags = tag(opts.tags, vendor.tags);
 
     await vendorActions.edit(vendor);
     $.logSuccess('updated tags of', 'vendor', `with id ${id}`);

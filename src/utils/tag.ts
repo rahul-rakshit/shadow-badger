@@ -1,7 +1,4 @@
-export function tagify(
-  newTagsString?: string,
-  previousTags?: string[]
-): string[] {
+export function tag(newTagsString?: string, previousTags?: string[]): string[] {
   const tagsList = [
     ...(previousTags ?? []),
     ...(newTagsString ?? '').split(',')

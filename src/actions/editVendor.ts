@@ -2,10 +2,10 @@ import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { vendorActions } from '../entity/Vendor/vendorActions';
 import { Vendor } from '../entity/Vendor/Vendor-d';
 import { isNullish } from '../utils/isNullish';
-import { tagify } from '../utils/tagify';
 import { validateModelObject } from '../validations/validateModelObject';
 import { vendorValidatorMap } from '../entity/Vendor/vendorValidatorMap';
 import { failed } from '../types-d';
+import { tag } from '../utils/tag';
 
 export async function editVendor(opts: {
   id: string;
@@ -28,7 +28,7 @@ export async function editVendor(opts: {
     if (coordinates !== undefined) vendor.coordinates = coordinates;
     if (address !== undefined) vendor.address = address;
     if (description !== undefined) vendor.description = description;
-    if (!isNullish(tags)) vendor.tags = tagify(opts.tags, vendor.tags);
+    if (!isNullish(tags)) vendor.tags = tag(opts.tags, vendor.tags);
     const validation = validateModelObject<Vendor>(vendor, vendorValidatorMap);
 
     if (failed(validation)) {
