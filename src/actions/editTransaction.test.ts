@@ -29,6 +29,7 @@ describe('editTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
+      tags: [],
       accountId: 1,
       categoryId: 2,
       vendorId: 3
@@ -79,6 +80,7 @@ describe('editTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
+      tags: [],
       accountId: 1,
       categoryId: 2,
       vendorId: 3
@@ -113,6 +115,7 @@ describe('editTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
+      tags: [],
       accountId: 1,
       categoryId: 2,
       vendorId: 3
@@ -146,6 +149,7 @@ describe('editTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
+      tags: [],
       accountId: 1,
       categoryId: 2,
       vendorId: 3

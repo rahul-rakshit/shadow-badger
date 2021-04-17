@@ -43,6 +43,7 @@ describe('addTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
+      tags: [],
       account: dummyAccount,
       category: dummyCategory,
       vendor: dummyVendor
@@ -89,7 +90,8 @@ describe('addTransaction', () => {
     const dummyTransaction = {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: 'invalid number',
-      description: 'Just another time I spent money'
+      description: 'Just another time I spent money',
+      tags: ['weird_transactions']
     };
     transactionActions.create = jest.fn().mockResolvedValue({
       id: 10,
@@ -124,7 +126,8 @@ describe('addTransaction', () => {
     const dummyTransactionInput = {
       dateTime: '2020/08/17',
       amount: '99.99',
-      description: 'Just another time I spent money'
+      description: 'Just another time I spent money',
+      tags: 'erroneous_transaction'
     };
     transactionActions.create = jest.fn().mockImplementation(async () => {
       throw new Error('Help, some fatal crazy insane exception!');
@@ -143,7 +146,8 @@ describe('addTransaction', () => {
       description: 'Just another time I spent money',
       account: dummyAccount,
       category: dummyCategory,
-      vendor: dummyVendor
+      vendor: dummyVendor,
+      tags: ['erroneous_transaction']
     });
     expect($.logAndExitOnSqlEngineError).toHaveBeenCalledWith(
       'add',

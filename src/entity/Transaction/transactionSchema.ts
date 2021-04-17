@@ -15,6 +15,7 @@ export const transactionSchema = new EntitySchema<Transaction>({
     dateTime: { type: Date },
     amount: { type: String },
     description: { type: String },
+    tags: { type: 'simple-array' },
     accountId: { type: Number },
     categoryId: { type: Number },
     vendorId: { type: Number },

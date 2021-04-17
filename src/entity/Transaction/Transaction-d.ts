@@ -7,6 +7,7 @@ interface TransactionFields {
   dateTime?: Date;
   amount?: string;
   description?: string;
+  tags?: string[];
 }
 
 interface TransactionRelationFields {

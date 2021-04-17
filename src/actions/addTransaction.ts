@@ -8,6 +8,7 @@ import { validateModelObject } from '../validations/validateModelObject';
 import { transactionValidatorMap } from '../entity/Transaction/transactionValidatorMap';
 import { failed } from '../types-d';
 import { transactionActions } from '../entity/Transaction/transactionActions';
+import { tag } from '../utils/tag';
 
 export async function addTransaction(opts: {
   dateTime: string;
@@ -16,6 +17,7 @@ export async function addTransaction(opts: {
   accountId: string;
   categoryId: string;
   vendorId: string;
+  tags?: string;
 }) {
   const amount = opts.amount;
   const dateTime = getDate(opts.dateTime);
@@ -23,6 +25,7 @@ export async function addTransaction(opts: {
   const accountId = Number(opts.accountId);
   const categoryId = Number(opts.categoryId);
   const vendorId = Number(opts.vendorId);
+  const tags = tag(opts.tags);
 
   try {
     const account = await accountActions.findOne(accountId);
@@ -38,7 +41,8 @@ export async function addTransaction(opts: {
       description,
       account,
       category,
-      vendor
+      vendor,
+      tags
     };
 
     const validation = validateModelObject<Transaction>(

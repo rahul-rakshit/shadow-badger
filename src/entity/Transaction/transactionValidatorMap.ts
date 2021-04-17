@@ -4,8 +4,10 @@ import { required } from '../../validations/validationBuilders/required';
 import { combine } from '../../validations/combine';
 import { validNumber } from '../../validations/validationBuilders/validNumber';
 import { validDate } from '../../validations/validationBuilders/validDate';
+import { isArray } from '../../validations/validationBuilders/isArray';
 
 export const transactionValidatorMap: ModelValidatorMap<Transaction> = {
   dateTime: combine(required(), validDate()),
-  amount: combine(required(), validNumber())
+  amount: combine(required(), validNumber()),
+  tags: isArray()
 };

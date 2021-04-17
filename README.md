@@ -104,8 +104,10 @@ Account --> Snapshot: one to many
   - [x] add untag command and function to vendor
   - [x] ensure all vendor tests have a tags field
 - implement tagging and untagging for transactions
-  - [ ] add tags to schema and interface for transactions
-  - [ ] update all transactions fixtures to have a tags field
+  - [x] add tags to schema and interface for transactions
+  - [x] update all transactions fixtures to have a tags field
+  - [ ] check editVendor tag replacement
+  - [ ] implement editTransaction tag replacement
   - [ ] add tagging feature for transactions (manual testing), copying from vendors
   - [ ] add untagging feature for transactions (manual testing), copying from vendors
 - make view commands work by regex
