@@ -104,6 +104,7 @@ Account --> Snapshot: one to many
   - [ ] add untag command and function to all taggable models
 - make view commands work by regex
 - snapshots
+- format coordinates nicely
 - implement view-tags command for vendors and transactions
 - make accounts and transactions viewable by relation id
 - make vendors searchable by GPS with precision

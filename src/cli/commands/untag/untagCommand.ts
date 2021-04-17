@@ -1,0 +1,7 @@
+import { program } from 'commander';
+import { untagVendorCommand } from './untagVendorCommand';
+
+export const untagCommand = program
+  .command('untag')
+  .description('remove a tag from an instance of a model to the database')
+  .addCommand(untagVendorCommand);

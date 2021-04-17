@@ -9,6 +9,8 @@ import { accountSchema } from './src/entity/Account/accountSchema';
 import { currencySchema } from './src/entity/Currency/currencySchema';
 import { vendorSchema } from './src/entity/Vendor/vendorSchema';
 import { transactionSchema } from './src/entity/Transaction/transactionSchema';
+import { tagCommand } from './src/cli/commands/tag/tagCommand';
+import { untagCommand } from './src/cli/commands/untag/untagCommand';
 
 async function run() {
   await createConnection({
@@ -35,6 +37,8 @@ async function run() {
   program.addCommand(editCommand);
   program.addCommand(viewCommand);
   program.addCommand(deleteCommand);
+  program.addCommand(tagCommand);
+  program.addCommand(untagCommand);
 
   await program.parseAsync(process.argv);
 }

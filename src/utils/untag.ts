@@ -1,4 +1,4 @@
-export function untag(tags: string[], tagToRemove: string) {
-  const trimmedTagToRemove = tagToRemove.trim();
-  return tags.filter((tag) => tag !== trimmedTagToRemove);
+export function untag(tags: string[], tagsToRemoveString: string) {
+  const tagsToRemove = tagsToRemoveString.split(',').map((tag) => tag.trim());
+  return tags.filter((tag) => !tagsToRemove.includes(tag));
 }
