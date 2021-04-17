@@ -13,7 +13,8 @@ describe('addVendor', () => {
     const rewe = {
       name: 'Rewe Pappelallee',
       address: 'Pappelallee 47, 10437 Berlin',
-      coordinates: '52.5476, 13.4191'
+      coordinates: '52.5476, 13.4191',
+      tags: 'supermarket'
     };
 
     await addVendor(rewe);

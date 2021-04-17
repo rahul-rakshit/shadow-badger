@@ -102,7 +102,7 @@ Account --> Snapshot: one to many
   - [x] rename tagify to tag
   - [x] rename remove-tag to untag
   - [x] add untag command and function to vendor
-  - [ ] ensure all vendor tests have a tags field
+  - [x] ensure all vendor tests have a tags field
 - implement tagging and untagging for transactions
   - [ ] add tags to schema and interface for transactions
   - [ ] update all transactions fixtures to have a tags field
