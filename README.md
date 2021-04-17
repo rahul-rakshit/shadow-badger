@@ -98,15 +98,19 @@ Account --> Snapshot: one to many
 
 ## Next Steps
 
-- implement tags for vendors and transactions as simple array fields
+- implement tags for vendors as simple array fields
   - [x] rename tagify to tag
   - [x] rename remove-tag to untag
-  - [ ] add untag command and function to all taggable models
+  - [x] add untag command and function to vendor
+  - [ ] ensure all vendor tests have a tags field
+- implement tagging and untagging for transactions
+  - [ ] add tags to schema and interface for transactions
+  - [ ] update all transactions fixtures to have a tags field
+  - [ ] add tagging feature for transactions (manual testing), copying from vendors
+  - [ ] add untagging feature for transactions (manual testing), copying from vendors
 - make view commands work by regex
 - snapshots
 - format coordinates nicely
 - implement view-tags command for vendors and transactions
 - make accounts and transactions viewable by relation id
 - make vendors searchable by GPS with precision
-
-I'm writing some more markdown `here` and it's good I think.
