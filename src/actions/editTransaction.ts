@@ -9,12 +9,14 @@ import { vendorActions } from '../entity/Vendor/vendorActions';
 import { validateModelObject } from '../validations/validateModelObject';
 import { transactionValidatorMap } from '../entity/Transaction/transactionValidatorMap';
 import { failed } from '../types-d';
+import { tag } from '../utils/tag';
 
 export async function editTransaction(opts: {
   id: string;
   dateTime?: string;
   amount?: string;
   description?: string;
+  tags?: string;
   accountId?: string;
   categoryId?: string;
   vendorId?: string;
@@ -30,6 +32,7 @@ export async function editTransaction(opts: {
     if (opts.dateTime) tnx.dateTime = getDate(opts.dateTime);
     if (opts.amount) tnx.amount = opts.amount;
     if (!isNullish(opts.description)) tnx.description = opts.description;
+    if (!isNullish(opts.tags)) tnx.tags = tag(opts.tags);
 
     if (opts.accountId) {
       const foundAccount = await accountActions.findOne(Number(opts.accountId));

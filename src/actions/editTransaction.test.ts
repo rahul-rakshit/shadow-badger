@@ -29,18 +29,23 @@ describe('editTransaction', () => {
       dateTime: new Date(Date.parse('2020/08/17')),
       amount: '99.99',
       description: 'Just another time I spent money',
-      tags: [],
+      tags: ['initial_tag'],
       accountId: 1,
       categoryId: 2,
       vendorId: 3
     };
     transactionActions.findOne = jest.fn().mockResolvedValue(transaction);
 
-    await editTransaction({ id: '10', amount: '103' });
+    await editTransaction({
+      id: '10',
+      tags: 'test_transaction, another_tag',
+      amount: '103'
+    });
 
     expect(transactionActions.edit).toHaveBeenCalledWith({
       ...transaction,
-      amount: '103'
+      amount: '103',
+      tags: ['test_transaction', 'another_tag']
     });
     expect(transactionActions.findOne).toHaveBeenCalledWith(
       10,

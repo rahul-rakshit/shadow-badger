@@ -12,6 +12,10 @@ export const addTransactionCommmand = program
   )
   .requiredOption('-a, --amount <amount>', 'The amount of the transaction')
   .option('-d, --description <description>', "The transaction's description")
+  .option(
+    '-#, --tags <tags>',
+    'A command-separated string of tags for the transaction'
+  )
   .requiredOption(
     '-aId, --account-id <accountId>',
     'The id of the referenced account'

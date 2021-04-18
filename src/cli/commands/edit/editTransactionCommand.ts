@@ -10,6 +10,10 @@ export const editTransactionCommand = program
   .option('-t, --dateTime, <dateTime>', 'The dateTime the transaction occured')
   .option('-a, --amount <amount>', 'The amount of the transaction')
   .option('-d, --description <description>', "The transaction's description")
+  .option(
+    '-#, --tags <tags>',
+    'A command-separated string of tags for the transaction'
+  )
   .option('-aId, --account-id <accountId>', 'The id of the referenced account')
   .option(
     '-cId, --category-id <categoryId>',

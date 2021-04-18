@@ -106,7 +106,7 @@ Account --> Snapshot: one to many
 - implement tagging and untagging for transactions
   - [x] add tags to schema and interface for transactions
   - [x] update all transactions fixtures to have a tags field
-  - [ ] check editVendor tag replacement
+  - [x] check editVendor tag replacement
   - [ ] implement editTransaction tag replacement
   - [ ] add tagging feature for transactions (manual testing), copying from vendors
   - [ ] add untagging feature for transactions (manual testing), copying from vendors
