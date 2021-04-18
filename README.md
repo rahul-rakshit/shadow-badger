@@ -67,9 +67,9 @@ class Transaction {
   number: version ✅
   ===
   Date: dateTime ✅
-  string?: amount ❌
+  string?: amount ✅
   string?: description ✅
-  string[]: tags ❌
+  string[]: tags ✅
   ===
   number: accountId ✅
   number: categoryId ✅
@@ -98,21 +98,19 @@ Account --> Snapshot: one to many
 
 ## Next Steps
 
-- implement tags for vendors as simple array fields
-  - [x] rename tagify to tag
-  - [x] rename remove-tag to untag
-  - [x] add untag command and function to vendor
-  - [x] ensure all vendor tests have a tags field
-- implement tagging and untagging for transactions
-  - [x] add tags to schema and interface for transactions
-  - [x] update all transactions fixtures to have a tags field
-  - [x] check editVendor tag replacement
-  - [x] implement editTransaction tag replacement
-  - [x] add tagging feature for transactions (manual testing), copying from vendors
-  - [x] add untagging feature for transactions (manual testing), copying from vendors
-- make view commands work by regex
+**getting schema version 1 out**
+
 - snapshots
+
+## **formatting of input data**
+
 - format coordinates nicely
-- implement view-tags command for vendors and transactions
-- make accounts and transactions viewable by relation id
+- get current date when adding transactions
+
+**convenience**
+
+- specify query SQL query type (LIKE, IN, etc.)
+- search transactions by dateTime range
+- search relation by code, not id
 - make vendors searchable by GPS with precision
+- implement view-tags command for vendors and transactions
