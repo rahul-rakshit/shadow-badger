@@ -107,9 +107,9 @@ Account --> Snapshot: one to many
   - [x] add tags to schema and interface for transactions
   - [x] update all transactions fixtures to have a tags field
   - [x] check editVendor tag replacement
-  - [ ] implement editTransaction tag replacement
-  - [ ] add tagging feature for transactions (manual testing), copying from vendors
-  - [ ] add untagging feature for transactions (manual testing), copying from vendors
+  - [x] implement editTransaction tag replacement
+  - [x] add tagging feature for transactions (manual testing), copying from vendors
+  - [x] add untagging feature for transactions (manual testing), copying from vendors
 - make view commands work by regex
 - snapshots
 - format coordinates nicely

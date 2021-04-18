@@ -2,17 +2,17 @@ jest.mock('../cli/cli-helpers/processUtil');
 jest.mock('../entity/Transaction/transactionActions');
 
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
-import {
-  viewTransactionsDummyTransactions,
-  viewTransactionsLog
-} from './__fixtures__/viewTransactionsFixtures';
 import { transactionActions } from '../entity/Transaction/transactionActions';
 import { viewTransactions } from './viewTransactions';
 import { Transaction } from '../entity/Transaction/Transaction-d';
+import {
+  dummyTransactions,
+  transactionLog
+} from './__fixtures__/transactionFixtures';
 
 describe('viewTransactions', () => {
   it('shows all accounts that were found', async () => {
-    const expectedTransactionsList = viewTransactionsDummyTransactions.filter(
+    const expectedTransactionsList = dummyTransactions.filter(
       (tnx) => tnx.vendorId === 11
     );
     transactionActions.findAll = jest
@@ -40,12 +40,12 @@ describe('viewTransactions', () => {
   it('logs id, dateTime, amount, account code, category code and vendor name', async () => {
     transactionActions.findAll = jest
       .fn()
-      .mockResolvedValue(viewTransactionsDummyTransactions);
+      .mockResolvedValue(dummyTransactions);
 
     await viewTransactions({});
 
     expect($.logList).toHaveBeenCalledWith(
-      viewTransactionsLog,
+      transactionLog,
       'transactions',
       {}
     );
