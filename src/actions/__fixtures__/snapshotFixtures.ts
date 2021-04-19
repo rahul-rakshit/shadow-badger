@@ -18,7 +18,7 @@ export const secondVolksbankSnapshot: Snapshot = {
   id: 3,
   dateTime: getDate('2021-03-12 14:38'),
   balance: '1922.67',
-  description: '',
+  description: 'Friday afternoon snapshot',
   accountId: dummyVolksbank.id,
   account: dummyVolksbank
 };

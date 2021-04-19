@@ -38,17 +38,11 @@ describe('viewTransactions', () => {
   });
 
   it('logs id, dateTime, amount, account code, category code and vendor name', async () => {
-    transactionActions.findAll = jest
-      .fn()
-      .mockResolvedValue(dummyTransactions);
+    transactionActions.findAll = jest.fn().mockResolvedValue(dummyTransactions);
 
     await viewTransactions({});
 
-    expect($.logList).toHaveBeenCalledWith(
-      transactionLog,
-      'transactions',
-      {}
-    );
+    expect($.logList).toHaveBeenCalledWith(transactionLog, 'transactions', {});
   });
 
   it('exits with a message if there is an sql engine error', async () => {
