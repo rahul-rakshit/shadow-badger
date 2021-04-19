@@ -1,65 +1,8 @@
-import { Account } from '../../entity/Account/Account-d';
-import { Currency } from '../../entity/Currency/Currency-d';
 import { getDate } from '../../utils/getDate';
-import { Category } from '../../entity/Category/Category-d';
-import { Vendor } from '../../entity/Vendor/Vendor-d';
 import { Transaction } from '../../entity/Transaction/Transaction-d';
-
-export const dummyEuro: Currency = {
-  id: 5,
-  name: 'Euro',
-  code: 'EUR',
-  symbol: '€',
-  description: 'The currency of the European Union'
-};
-
-export const dummySparkasse: Account = {
-  id: 1,
-  name: 'Sparkasse Kassel',
-  description: 'Ein altes Konto, dass ich noch rumfliegen habe',
-  opened: getDate('1994/06/28'),
-  closed: null,
-  currency: dummyEuro,
-  currencyId: dummyEuro.id
-};
-
-export const dummyVolksbank: Account = {
-  id: 7,
-  name: 'Volksbank Göttingen',
-  description: '',
-  opened: getDate('2003/06/17'),
-  closed: null,
-  currency: dummyEuro,
-  currencyId: dummyEuro.id
-};
-
-export const dummyGroceries: Category = {
-  id: 2,
-  code: 'GRC',
-  description: 'Groceries'
-};
-
-export const dummyRent: Category = {
-  id: 4,
-  code: 'RNT',
-  description: 'Rent'
-};
-
-export const dummyLandlord: Vendor = {
-  id: 9,
-  name: 'Landlord',
-  coordinates: '',
-  address: '',
-  description: 'Mein Vermieter'
-};
-
-export const dummyLidl: Vendor = {
-  id: 11,
-  name: 'Lidl Prenzlauer Allee',
-  address: 'Prenzlauer Allee 44, 10405 Berlin, Germany',
-  description: 'Big on British, Lidl on price',
-  coordinates: '52.53629, 13.42295'
-};
+import { dummyLandlord, dummyLidl } from './vendorFixtures';
+import { dummyVolksbank, dummySparkasse } from './accountFixtures';
+import { dummyRent, dummyGroceries } from './categoryFixtures';
 
 export const dummyTransactions: Transaction[] = [
   {
