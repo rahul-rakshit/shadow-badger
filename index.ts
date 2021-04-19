@@ -11,6 +11,7 @@ import { vendorSchema } from './src/entity/Vendor/vendorSchema';
 import { transactionSchema } from './src/entity/Transaction/transactionSchema';
 import { tagCommand } from './src/cli/commands/tag/tagCommand';
 import { untagCommand } from './src/cli/commands/untag/untagCommand';
+import { snapshotSchema } from './src/entity/Snapshot/snapshotSchema';
 
 async function run() {
   await createConnection({
@@ -21,7 +22,8 @@ async function run() {
       accountSchema,
       categorySchema,
       vendorSchema,
-      transactionSchema
+      transactionSchema,
+      snapshotSchema
     ],
     synchronize: false
   });

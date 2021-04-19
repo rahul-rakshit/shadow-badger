@@ -100,7 +100,7 @@ Account --> Snapshot: one to many
 
 **getting schema version 1 out**
 
-- snapshots
+- 🔁 snapshots
 
 **formatting of input data**
 
@@ -111,6 +111,7 @@ Account --> Snapshot: one to many
 
 - specify query SQL query type (LIKE, IN, etc.)
 - search transactions by dateTime range
+- calculate balance on a certain day and today
 - search relation by code, not id
 - make vendors searchable by GPS with precision
 - implement view-tags command for vendors and transactions
