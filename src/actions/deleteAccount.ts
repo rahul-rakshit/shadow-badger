@@ -1,6 +1,7 @@
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { accountActions } from '../entity/Account/accountActions';
 import { transactionActions } from '../entity/Transaction/transactionActions';
+import { snapshotActions } from '../entity/Snapshot/snapshotActions';
 
 export async function deleteAccount({ id: idString }: { id: string }) {
   try {
@@ -11,7 +12,10 @@ export async function deleteAccount({ id: idString }: { id: string }) {
     const dependingTransaction = await transactionActions.findOne(undefined, {
       where: { account: foundAccount }
     });
-    if (dependingTransaction) {
+    const dependingSnapshot = await snapshotActions.findOne(undefined, {
+      where: { account: foundAccount }
+    });
+    if (dependingTransaction || dependingSnapshot) {
       const accountId = foundAccount?.id as number;
       $.logAndExitHasDependingEntry('delete', 'account', accountId);
     }
