@@ -11,16 +11,16 @@ import { transactionActions } from '../entity/Transaction/transactionActions';
 import { tag } from '../utils/tag';
 
 export async function addTransaction(opts: {
-  dateTime: string;
   amount: string;
   description?: string;
   accountId: string;
   categoryId: string;
   vendorId: string;
+  dateTime?: string;
   tags?: string;
 }) {
   const amount = opts.amount;
-  const dateTime = getDate(opts.dateTime);
+  const dateTime = opts.dateTime ? getDate(opts.dateTime) : new Date();
   const description = opts.description ?? '';
   const accountId = Number(opts.accountId);
   const categoryId = Number(opts.categoryId);
