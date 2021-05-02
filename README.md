@@ -98,10 +98,6 @@ Account --> Snapshot: one to many
 
 ## Next Steps
 
-**getting schema version 1 out**
-
-- 🔁 snapshots
-
 **formatting of input data**
 
 - format coordinates nicely

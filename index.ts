@@ -13,10 +13,28 @@ import { tagCommand } from './src/cli/commands/tag/tagCommand';
 import { untagCommand } from './src/cli/commands/untag/untagCommand';
 import { snapshotSchema } from './src/entity/Snapshot/snapshotSchema';
 
+import {
+  getDbPath,
+  doesDbFileExist,
+  printFirstUsageText,
+  abortIfNotConfirmDbCreation,
+  setupDbMessage
+} from './src/cli/cli-helpers/startup';
+
+const dbPathEnv = process.env.SHADOW_BADGER_DB_PATH;
+
 async function run() {
+  const dbPath = getDbPath(dbPathEnv);
+  const noDbOnStartup = !doesDbFileExist(dbPath);
+
+  if (noDbOnStartup) {
+    printFirstUsageText(dbPath, dbPathEnv);
+    await abortIfNotConfirmDbCreation();
+  }
+
   await createConnection({
     type: 'sqlite',
-    database: 'test.sqlite3',
+    database: dbPath,
     entities: [
       currencySchema,
       accountSchema,
@@ -25,24 +43,28 @@ async function run() {
       transactionSchema,
       snapshotSchema
     ],
-    synchronize: false
+    synchronize: noDbOnStartup
   });
 
-  program.storeOptionsAsProperties(false).passCommandToAction(false);
+  if (noDbOnStartup) {
+    setupDbMessage();
+  } else {
+    program.storeOptionsAsProperties(false).passCommandToAction(false);
 
-  program
-    .name('shadow-badger')
-    .version('0.1.0')
-    .usage('action model [options]');
+    program
+      .name('shadow-badger')
+      .version('0.1.0')
+      .usage('action model [options]');
 
-  program.addCommand(addCommand);
-  program.addCommand(editCommand);
-  program.addCommand(viewCommand);
-  program.addCommand(deleteCommand);
-  program.addCommand(tagCommand);
-  program.addCommand(untagCommand);
+    program.addCommand(addCommand);
+    program.addCommand(editCommand);
+    program.addCommand(viewCommand);
+    program.addCommand(deleteCommand);
+    program.addCommand(tagCommand);
+    program.addCommand(untagCommand);
 
-  await program.parseAsync(process.argv);
+    await program.parseAsync(process.argv);
+  }
 }
 
 run();
