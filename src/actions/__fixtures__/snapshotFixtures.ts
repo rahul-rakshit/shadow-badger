@@ -1,11 +1,11 @@
 import { Snapshot } from '../../entity/Snapshot/Snapshot-d';
 import { getDate } from '../../utils/getDate';
-import { dummyVolksbank } from './accountFixtures';
+import { dummyVolksbank, dummySparkasse } from './accountFixtures';
 
 export const firstVolksbankSnapshotWithoutId: Snapshot = {
   dateTime: getDate('2021-01-27 15:17'),
   balance: '1324.68',
-  description: '',
+  description: 'Just a snapshot',
   account: dummyVolksbank
 };
 
@@ -21,4 +21,13 @@ export const secondVolksbankSnapshot: Snapshot = {
   description: 'Friday afternoon snapshot',
   accountId: dummyVolksbank.id,
   account: dummyVolksbank
+};
+
+export const firstSparkasseSnapshot: Snapshot = {
+  id: 1,
+  dateTime: getDate('2021-01-27 15:17'),
+  balance: '433.28',
+  description: '',
+  account: dummySparkasse,
+  accountId: 1
 };

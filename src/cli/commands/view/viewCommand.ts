@@ -10,6 +10,7 @@ import { viewVendorsCommand } from './viewVendorsCommand';
 import { viewTransactionCommand } from './viewTransactionCommand';
 import { viewTransactionsCommand } from './viewTransactionsCommand';
 import { viewSnapshotCommand } from './viewSnapshotCommand';
+import { viewSnapshotsCommand } from './viewSnapshotsCommand';
 
 export const viewCommand = program
   .command('view <model>')
@@ -24,4 +25,5 @@ export const viewCommand = program
   .addCommand(viewVendorsCommand)
   .addCommand(viewTransactionCommand)
   .addCommand(viewTransactionsCommand)
-  .addCommand(viewSnapshotCommand);
+  .addCommand(viewSnapshotCommand)
+  .addCommand(viewSnapshotsCommand);

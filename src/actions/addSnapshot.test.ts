@@ -22,7 +22,8 @@ describe('addSnapshot', () => {
     id: '2',
     dateTime: '2021-01-27 15:17',
     balance: '1324.68',
-    accountId: '7'
+    accountId: '7',
+    description: 'Just a snapshot'
   };
 
   it('adds a snapshot to DB if successful', async () => {

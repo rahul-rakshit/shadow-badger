@@ -43,7 +43,7 @@ describe('viewAccounts', () => {
       currencyId: 3,
       currency: currenciesList[2],
       createdAt: new Date(),
-      updatedAt: new Date(),
+      pdatedAt: new Date(),
       version: 4
     }
   ];
@@ -101,7 +101,7 @@ describe('viewAccounts', () => {
   it('can also be called with an empty map of options', async () => {
     accountActions.findAll = jest.fn().mockResolvedValue(accountsList);
 
-    await viewAccounts({ description: 'bank' });
+    await viewAccounts({});
 
     const loggedArray: Account[] = ($.logList as any).mock.calls[0][0];
     expect(loggedArray).toHaveLength(3);
