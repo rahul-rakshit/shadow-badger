@@ -98,11 +98,6 @@ Account --> Snapshot: one to many
 
 ## Next Steps
 
-**formatting of input data**
-
-- format coordinates nicely
-- get current date when adding transactions
-
 **convenience**
 
 - specify query SQL query type (LIKE, IN, etc.)
