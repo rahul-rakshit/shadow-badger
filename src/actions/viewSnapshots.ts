@@ -24,7 +24,7 @@ export async function viewSnapshots(opts: {
 
     const loggable = allSnapshots.map((snapshot) => ({
       id: snapshot.id,
-      dateTime: snapshot.dateTime,
+      dateTime: snapshot.dateTime?.toISOString(),
       balance: snapshot.balance,
       accountCode: snapshot.account?.code,
       accountId: snapshot.account?.id

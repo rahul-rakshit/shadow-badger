@@ -46,14 +46,14 @@ describe('viewSnapshots', () => {
     const expectedLoggedArray = [
       {
         id: 2,
-        dateTime: getDate('2021-01-27 15:17'),
+        dateTime: getDate('2021-01-27 15:17').toISOString(),
         balance: '1324.68',
         accountCode: 'VBGOE',
         accountId: 7
       },
       {
         id: 3,
-        dateTime: getDate('2021-03-12 14:38'),
+        dateTime: getDate('2021-03-12 14:38').toISOString(),
         balance: '1922.67',
         accountCode: 'VBGOE',
         accountId: 7
