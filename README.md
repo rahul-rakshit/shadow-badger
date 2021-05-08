@@ -77,16 +77,16 @@ class Transaction {
 }
 
 class Snapshot {
-  primaryKey: id ❌
-  Date: createdAt ❌
-  Date: updatedAt ❌
-  number: version ❌
+  primaryKey: id ✅
+  Date: createdAt ✅
+  Date: updatedAt ✅
+  number: version ✅
   ===
-  Date: dateTime ❌
-  string: balance ❌
-  string?: description ❌
+  Date: dateTime ✅
+  string: balance ✅
+  string?: description ✅
   ===
-  number: accountId ❌
+  number: accountId ✅
 }
 
 Currency --> Account: one to many
