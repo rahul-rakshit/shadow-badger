@@ -4,6 +4,7 @@ jest.mock('../entity/Transaction/transactionActions');
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { transactionActions } from '../entity/Transaction/transactionActions';
 import { viewTransaction } from './viewTransaction';
+import { operators } from '../entity/generateActionsWrapper';
 
 describe('viewTransaction', () => {
   describe('when id is provided', () => {
@@ -52,7 +53,9 @@ describe('viewTransaction', () => {
 
       expect(transactionActions.findOne).toHaveBeenCalledWith(undefined, {
         relations: ['account', 'category', 'vendor'],
-        where: { description: 'A test double for transaction' }
+        where: {
+          description: operators.ilike('%A test double for transaction%')
+        }
       });
       expect($.logObject).toHaveBeenCalledWith(dummyTransaction, 'transaction');
     });
@@ -60,17 +63,26 @@ describe('viewTransaction', () => {
     it('tries to find a transaction with the provided options', async () => {
       await viewTransaction({
         dateTime: '2020/03/07',
-        vendorId: '27',
-        description: 'abcdefg'
+        vendorId: '27'
       });
 
       expect(transactionActions.findOne).toHaveBeenCalledWith(undefined, {
         relations: ['account', 'category', 'vendor'],
         where: {
           dateTime: new Date(Date.parse('2020/03/07')),
-          vendorId: 27,
-          description: 'abcdefg'
+          vendorId: 27
         }
+      });
+    });
+
+    it('uses adds special operators for description', async () => {
+      await viewTransaction({
+        description: 'abcdefg'
+      });
+
+      expect(transactionActions.findOne).toHaveBeenCalledWith(undefined, {
+        relations: ['account', 'category', 'vendor'],
+        where: { description: operators.ilike('%abcdefg%') }
       });
     });
 

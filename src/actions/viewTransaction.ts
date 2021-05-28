@@ -1,6 +1,6 @@
 import { processUtil as $ } from '../cli/cli-helpers/processUtil';
 import { areOptionsEmpty } from '../utils/areOptionsEmpty';
-import { AllowedRelations } from '../entity/generateActionsWrapper';
+import { AllowedRelations, operators } from '../entity/generateActionsWrapper';
 import { transactionActions } from '../entity/Transaction/transactionActions';
 import { parseDefinedOpts } from '../utils/parseDefinedOpts';
 import { Transaction } from '../entity/Transaction/Transaction-d';
@@ -27,7 +27,10 @@ export async function viewTransaction(opts: {
       dateTime: opts.dateTime ? new Date(Date.parse(opts.dateTime)) : undefined,
       accountId: opts.accountId ? Number(opts.accountId) : undefined,
       categoryId: opts.categoryId ? Number(opts.categoryId) : undefined,
-      vendorId: opts.vendorId ? Number(opts.vendorId) : undefined
+      vendorId: opts.vendorId ? Number(opts.vendorId) : undefined,
+      description: opts.description
+        ? operators.ilike(`%${opts.description}%`)
+        : undefined
     };
     const foundTransaction = id
       ? await transactionActions.findOne(id, { relations })

@@ -2,8 +2,15 @@ import {
   EntitySchema,
   getRepository,
   DeleteResult,
-  UpdateResult
+  UpdateResult,
+  ILike
 } from 'typeorm';
+import { Field } from '../validations/validations-d';
+
+type OperatorFunction = (field: Field) => any;
+export const operators: { [key: string]: OperatorFunction } = {
+  ilike: ILike
+};
 
 export type AllowedRelations = 'currency' | 'account' | 'category' | 'vendor';
 
@@ -18,7 +25,7 @@ export interface Actions<T> {
   findOne: (
     id?: number,
     options?: {
-      where?: Partial<T>;
+      where?: Partial<T> & { [key in keyof T]: ReturnType<OperatorFunction> };
       relations?: AllowedRelations[];
     }
   ) => Promise<T | undefined>;
@@ -53,7 +60,7 @@ export function generateActionsWrapper<T>(
     async findOne(
       id?: number,
       options?: {
-        where?: Partial<T>;
+        where?: Partial<T> & { [key in keyof T]: ReturnType<OperatorFunction> };
         relations?: AllowedRelations[];
       }
     ) {
